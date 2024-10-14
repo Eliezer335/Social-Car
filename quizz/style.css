@@ -1,0 +1,90 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.cabecario{
+    width: 100%;
+    height: 70px;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logoHeader{
+    width: 70px;
+    margin-left: 100px ;
+}
+
+.h2Cabecario{
+    color: white;
+}
+
+.botoesCabecario{
+    color: white;
+    display: flex;
+    padding-right: 120px;
+}
+
+.botoesHeader{
+    display: flex;
+    padding-left: 80px;
+    
+}
+
+.corpo{
+    padding-left: 20px;
+}
+
+.btn_criar_quizz{
+    display: flex;
+    justify-content: right;
+    margin-right: 80px;
+}
+.btn_quizz{
+    width: 120px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center; 
+    background-color: #fe7673;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.caixas_quizz{
+    width: 800px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 25px;
+    padding-left: 300px;
+    
+}
+.quizz{
+    width: 220px;
+    height: 180px;
+    background-color: black;
+    border-top-left-radius: 10px ;
+    border-top-right-radius: 10px; 
+}
+
+.h2_titulo_quizz{
+    color: white;
+    font-size: 13px;
+    margin-top: 10px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.imagem_quizz{
+    width: 180px;
+    height: 138px;
+}
+
