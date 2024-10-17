@@ -84,7 +84,12 @@
 }
 
 .imagem_quizz{
-    width: 180px;
+    width: 220px;
     height: 138px;
+
+    background-image: url(bugate.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
