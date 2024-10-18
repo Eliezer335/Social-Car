@@ -77,3 +77,42 @@ body{
     background-color: rgb(0, 0, 0);
     margin-bottom: 20px;
 }
+
+.containerUsuario{
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.imgUsuario{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-image: url(imagem1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: solid 0.5px white;
+    background-color: rgb(184, 184, 184);
+}
+.nomeUsuario{
+    margin-left: 10px;
+}
+
+.legendaPublicacao{
+    color: white;
+    padding-top: 15px;
+    text-align: center;
+}
+
+.imgPublicacao{
+    width: 600px;
+    height: 400px;
+    margin-top: 10px;
+    background-image: url(fusca.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
