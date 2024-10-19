@@ -1,0 +1,132 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-image: linear-gradient(white, rgb(10, 10, 10));
+    background-attachment: fixed;
+    height: 100%;
+}
+
+.cabecario{
+    width: 100%;
+    height: 70px;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logoHeader{
+    width: 70px;
+    margin-left: 100px ;
+}
+
+.h2Cabecario{
+    color: white;
+}
+
+.botoesCabecario{
+    color: white;
+    display: flex;
+    padding-right: 120px;
+}
+
+.botoesHeader{
+    display: flex;
+    padding-left: 80px; 
+}
+
+.corpo{
+    width: 100%;
+    display: flex;
+}
+
+.caixa_sobre_site{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    padding-top: 35px;
+}
+.sobre_site{
+    width: 680px;
+    height: 500px;
+    background-color: black;
+    border-radius: 5px;
+    font-family: sans-serif;
+    color: white;
+}
+
+.caixa_curiosidades{
+    padding-top: 35px;
+}
+
+.curiosidades{
+    width: 300px;
+    height: 110px;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-family: sans-serif;
+}
+
+.h2_curiosidades{
+    text-align: center;
+    background-color: black;
+    color: white;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.p_curiosidades{
+    padding: 6px;
+    box-sizing: border-box;
+}
+
+.sobre_site{
+    padding: 25px 38px 10px 38px;
+    box-sizing: border-box;
+}
+
+.h2_sobre{
+    text-align: center;
+}
+
+.p_sobre{
+    margin-top: 25px;
+}
+
+.h2_sobre_dev{
+    margin: 50px 0 15px 0;
+}
+
+.container_desenvolvedor{
+    display: flex;
+}
+
+.perfil_desenvolvedor{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-image: url(imagem1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.nome_desenvolvedor{
+    margin: 12px 0 0 20px;
+}
+
+.p_sobre_dev{
+    margin-top: 20px;
+    padding: 0 29px 0 29px;
+}
+
