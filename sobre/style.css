@@ -17,6 +17,7 @@ body{
     justify-content: space-between;
     align-items: center;
 }
+
 .logo{
     display: flex;
     align-items: center;
@@ -39,14 +40,12 @@ body{
 
 .botoesHeader{
     display: flex;
-    padding-left: 80px;
-    
+    padding-left: 80px; 
 }
 
 .corpo{
     width: 100%;
     display: flex;
-
 }
 
 .caixa_sobre_site{
@@ -75,8 +74,8 @@ body{
     margin-bottom: 20px;
     border-radius: 5px;
     font-family: sans-serif;
-
 }
+
 .h2_curiosidades{
     text-align: center;
     background-color: black;
