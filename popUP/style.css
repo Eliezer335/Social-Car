@@ -1,0 +1,75 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.caixa_popUp{
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+.popUp{
+    width: 800px;
+    height: 575px;
+    background-color: white;
+    border-radius: 15px;
+    position: fixed;
+    border: solid 2px black;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container_perfil{
+    display: flex;
+    align-items: center;
+}
+
+.perfil_usuario{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-image: url(imagem1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: solid 0.1px rgb(170, 170, 170);
+}
+
+.nome_usuario{
+    margin-left: 15px;
+}
+
+.txtArea{
+    width: 100%;
+    height: 350px;
+    margin-top: 25px;
+}
+
+.caixaBtn{
+    display: flex;
+    justify-content: space-between;
+}
+
+.caixaBtnImg{
+    display: flex;
+}
+
+.btnImg{
+    width: 25px;
+    margin: 25px 5px 0 5px;    
+}
+
+.caixaBtnEnviar{
+    display: flex;
+}
+
+.botaoEnviar{
+    width: 120px;
+    height: 30px;
+    margin-top: 25px;
+    background-color: #fe7673;
+    border-radius: 25px;
+    border: none;
+}
