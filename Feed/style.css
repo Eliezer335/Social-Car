@@ -53,12 +53,67 @@ body{
     width: 25%;
     height: 500px;
 }
-.perfil{
+.caixaPerfil{
     width: 300px;
     height: 500px;
-    background-color: azure;
+    background-color: black;
+    border-radius: 5px;
+}
+.perfil{
     display: flex;
-    justify-content: right;
+    color: white;
+    padding: 15px 0 25px 10px;
+    box-sizing: border-box;
+}
+
+/* verificar se tera futuro conflito se usar a mesma classe para imagem das publicaçoes e a do perfil( pois a do perfil sera do mesmo
+usuario e a das publicacoes serao de varios usuarios) */
+.imgPerfil{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-image: url(imagem1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: solid 0.5px white;
+    background-color: rgb(184, 184, 184);
+}
+.nomePerfil{
+    margin: 10px;
+}
+
+.pPerfil{
+    color: white;
+    text-align: center;
+}
+
+.caixaBtn{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.btnPublicar{
+    width: 200px;
+    height: 50px;
+    background-color: #fe7673;
+    border-radius: 10px;
+    border: none;
+}
+
+.caixaQuizz{
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.h3Quizz{
+    color: white;
+}
+
+.quizzSalvos{
+    color: white;
+    padding: 15px;
 }
 
 .publicacoes{
@@ -76,4 +131,43 @@ body{
     border-top-right-radius: 7px; 
     background-color: rgb(0, 0, 0);
     margin-bottom: 20px;
+}
+
+.containerUsuario{
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.imgUsuario{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-image: url(imagem1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: solid 0.5px white;
+    background-color: rgb(184, 184, 184);
+}
+.nomeUsuario{
+    margin-left: 10px;
+}
+
+.legendaPublicacao{
+    color: white;
+    padding-top: 15px;
+    text-align: center;
+}
+
+.imgPublicacao{
+    width: 600px;
+    height: 400px;
+    margin-top: 10px;
+    background-image: url(fusca.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
