@@ -37,6 +37,11 @@ body{
     padding-right: 120px;
 }
 
+.botoesCabecario a{
+    text-decoration: none;
+    color: white;
+}
+
 .botoesHeader{
     display: flex;
     padding-left: 80px;
