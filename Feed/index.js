@@ -1,8 +1,13 @@
 
-function abrirAba(pasta) {
-    const aberturaPopUp = document.querySelector(pasta)
-    aberturaPopUp.style.display="flex";
-    console.log("deu ruim", aberturaPopUp)
+function abrirAba() {
+    const aberturaPopUp = document.querySelector('.container_popup')
+    aberturaPopUp.style.display="block";
+
 }
 
-// abrirAba()
+function fecharAba() {
+    const aberturaPopUp = document.querySelector('.container_popup')
+    aberturaPopUp.style.display="none";
+    
+
+}
