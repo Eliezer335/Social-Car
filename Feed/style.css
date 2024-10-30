@@ -66,8 +66,6 @@ body{
     box-sizing: border-box;
 }
 
-/* verificar se tera futuro conflito se usar a mesma classe para imagem das publicaçoes e a do perfil( pois a do perfil sera do mesmo
-usuario e a das publicacoes serao de varios usuarios) */
 .imgPerfil{
     width: 40px;
     height: 40px;
