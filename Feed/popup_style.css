@@ -2,7 +2,15 @@
     padding: 0;
     margin: 0;
 }
-
+.container_popup{
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    display: none;
+    background-color: rgba(128, 128, 128, 0.529);
+}
 .caixa_popUp{
     display: flex;
     justify-content: center;
