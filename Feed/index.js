@@ -13,33 +13,34 @@ function fecharAba() {
 }
 
 function adicionarImg(){
-const inputImg = document.querySelector('.inputImg');
-const exibirImg = document.querySelector('.exibirImg');
-const imagemTxt = 'Escolha uma imagem'
-exibirImg.innerHTML = imagemTxt
+    const inputImg = document.querySelector('.inputImg');
+    const exibirImg = document.querySelector('.exibirImg');
+    const imagemTxt = 'Escolha uma imagem'
+    exibirImg.innerHTML = imagemTxt
 
-inputImg.addEventListener('change', function(e) {
-    const inputTarget = e.target;
-    console.log(inputTarget);
-    const imagem = inputTarget.imagem[0];
+    inputImg.addEventListener('change', function(event) {
+        const inputTarget = event.target;
+        console.log(inputTarget.files);
+        const imagem = inputTarget.files[0];
 
-    console.log(imagem);
-    if(imagem){
-        const reader = new FileReader();
+        console.log(imagem);
 
-        reader.addEventListener('load', function(e) {
-            const readerTarget = e.target;
+        if(imagem){
+            const reader = new FileReader();
 
-            const img = document.createElement('img');
-            img.src = readerTarget.result
-            img.classList.add('.exibirImg');
+            reader.addEventListener('load', function(event) {
+                const readerTarget = event.target;
+                exibirImg.innerHTML = ""
+                const img = document.createElement('img');
+                img.src = readerTarget.result
+                img.classList.add('exibirImg');
 
-            imagem.appendChild(img)
-        })
-        reader.readAsDataURL(imagem)
-    }else{
-        imagem.innerHTML = imagem
-    }
-})
+                exibirImg.appendChild(img)
+            })
+            reader.readAsDataURL(imagem)
+         }//else{
+        //     imagem.innerHTML = imagem
+        // }
+    })
 
 }
