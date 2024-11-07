@@ -11,3 +11,36 @@ function fecharAba() {
     
 
 }
+
+function adicionarImg(){
+    const inputImg = document.querySelector('.inputImg');
+    const exibirImg = document.querySelector('.exibirImg');
+    const imagemTxt = 'Escolha uma imagem'
+    exibirImg.innerHTML = imagemTxt
+
+    inputImg.addEventListener('change', function(event) {
+        const inputTarget = event.target;
+        console.log(inputTarget.files);
+        const imagem = inputTarget.files[0];
+
+        console.log(imagem);
+
+        if(imagem){
+            const reader = new FileReader();
+
+            reader.addEventListener('load', function(event) {
+                const readerTarget = event.target;
+                exibirImg.innerHTML = ""
+                const img = document.createElement('img');
+                img.src = readerTarget.result
+                img.classList.add('exibirImg');
+
+                exibirImg.appendChild(img)
+            })
+            reader.readAsDataURL(imagem)
+         }//else{
+        //     imagem.innerHTML = imagem
+        // }
+    })
+
+}
