@@ -20,7 +20,7 @@
 
 .popUp{
     width: 800px;
-    height: 575px;
+    height: 640px;
     background-color: white;
     border-radius: 15px;
     position: fixed;
@@ -64,9 +64,27 @@
     display: flex;
 }
 
+.labelBtnImg{
+    width: 250px;
+    aspect-ratio: 16/9;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed rgb(168, 168, 168);
+    cursor: pointer;
+}
+
+.exibirImg{
+    color:  rgb(168, 168, 168);
+}
+
+.exibirImg{
+    max-width: 100%;
+}
 .btnImg{
     width: 25px;
-    margin: 25px 5px 0 5px;    
+    margin: 25px 5px 0 5px; 
 }
 
 .caixaBtnEnviar{
@@ -80,4 +98,8 @@
     background-color: #fe7673;
     border-radius: 25px;
     border: none;
+}
+
+.inputImg{
+    display: none;
 }
