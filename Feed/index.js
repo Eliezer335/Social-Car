@@ -1,3 +1,4 @@
+import {v4 as uuidv4} from "uuid"
 
 function abrirAba() {
     const aberturaPopUp = document.querySelector('.container_popup')
@@ -44,6 +45,8 @@ function adicionarImg(){
 }
 
 function publicar() {
+    const id = uuidv4()
+    console.log(id)
     const todasPublicacaoes = document.querySelector('.publicacoes')
     const txtLegenda = document.querySelector('.txtArea').value;
     const imagemPublicacao = document.querySelector('.exibirImg') 
@@ -59,3 +62,5 @@ function publicar() {
             </div>
     `
 }
+
+publicar()

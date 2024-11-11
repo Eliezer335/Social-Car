@@ -169,6 +169,16 @@ body{
     width: 600px;
     height: 400px;
     margin-top: 10px;
+    /* background-image: url(fusca.png); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.imgPrimeiraPublicacao{
+    width: 600px;
+    height: 400px;
+    margin-top: 10px;
     background-image: url(fusca.png);
     background-position: center;
     background-repeat: no-repeat;
