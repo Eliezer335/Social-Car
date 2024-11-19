@@ -44,3 +44,9 @@ button{
     cursor: pointer;
     border: none;
 }
+
+a{
+    color: white;
+    text-decoration: none;
+    margin-top: 20px;
+}
