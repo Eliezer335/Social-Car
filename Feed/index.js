@@ -1,8 +1,25 @@
+function verificaLogin(){
+    const credenciais = localStorage.getItem("SocialCar")
+    const perfil = document.querySelector(".perfil")
+    const caixaQuizz = document.querySelector(".caixaQuizz")
+
+    if (!credenciais) {
+        perfil.style.display = "none";
+        caixaQuizz.style.display = "none";
+    }
+}
+verificaLogin();
 
 function abrirAba() {
     const aberturaPopUp = document.querySelector('.container_popup')
-    aberturaPopUp.style.display="block";
 
+    const credenciais = localStorage.getItem("SocialCar")
+    if (!credenciais) {
+        window.location.href="../login/index.html#ancora"
+        alert("Para fazer uma publicação, faça login!")
+    }else{
+        aberturaPopUp.style.display="block";
+    }
 }
 
 function fecharAba() {
