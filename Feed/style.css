@@ -56,13 +56,14 @@ body{
 } 
 .perfil_container{
     width: 25%;
-    height: 500px;
+    height: auto;
 }
 .caixaPerfil{
     width: 300px;
-    height: 500px;
     background-color: black;
     border-radius: 5px;
+    padding: 25px;
+    box-sizing: border-box;
 }
 .perfil{
     display: flex;
