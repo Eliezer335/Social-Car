@@ -1,0 +1,176 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-image: linear-gradient(white, rgb(10, 10, 10));
+    background-attachment: fixed;
+    height: 100%;
+}
+
+.cabecario{
+    width: 100%;
+    height: 70px;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logoHeader{
+    width: 70px;
+    margin-left: 100px ;
+}
+
+.h2Cabecario{
+    color: white;
+}
+
+.botoesCabecario{
+    color: white;
+    display: flex;
+    padding-right: 120px;
+}
+
+.botoesCabecario a{
+    text-decoration: none;
+    color: white;
+}
+
+.botoesHeader{
+    display: flex;
+    padding-left: 80px;
+    
+}
+.corpo{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    padding: 20px;
+    box-sizing: border-box;
+} 
+.perfil_container{
+    display: flex;
+    justify-content: center;
+    height: auto;
+}
+.caixaPerfil{
+    width: 600px;
+    background-color: black;
+    border-radius: 5px;
+    padding: 25px;
+    box-sizing: border-box;
+    margin: 20px;
+}
+.perfil{
+    display: flex;
+    color: white;
+    padding: 15px 0 25px 10px;
+    box-sizing: border-box;
+}
+
+.imgPerfil{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-image: url(imagem1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: solid 0.5px white;
+    background-color: rgb(184, 184, 184);
+}
+
+.trocarFoto{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: solid 0.5px white;
+    background-color: rgb(184, 184, 184);
+}
+.nomePerfil{
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 21px;
+}
+
+.pPerfil{
+    color: white;
+    text-align: center;
+}
+
+.caixaBtnPerfil{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.btnPublicar{
+    width: 600px;
+    height: 50px;
+    background-color: #fe7673;
+    border-radius: 10px;
+    border: none;
+}
+
+.publicacoes{
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    flex-direction: column;
+}
+
+.publicacao{
+    width: 600px;
+    height: 500px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px; 
+    background-color: rgb(0, 0, 0);
+    margin-bottom: 20px;
+}
+
+.containerUsuario{
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.imgUsuario{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-image: url(imagem1.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: solid 0.5px white;
+    background-color: rgb(184, 184, 184);
+}
+.nomeUsuario{
+    margin-left: 10px;
+}
+
+.legendaPublicacao{
+    color: white;
+    padding-top: 15px;
+    text-align: center;
+}
+
+.imgPublicacao{
+    width: 600px;
+    height: 400px;
+    margin-top: 10px;
+    background-image: url(fusca.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
