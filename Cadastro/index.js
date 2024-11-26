@@ -14,10 +14,15 @@ formulario.addEventListener('submit', (evento) => {
 
     axios.post("https://socialcar-back.onrender.com/register", credenciais).then(response => {
         console.log("resposta",response.data);
-        alert("Cadastro efetuado com Sucesso!")
+        const objetoString = JSON.stringify(response.data)
+        localStorage.SocialCar_Cad = objetoString
+        window.location.href = "../login/index.html#ancora"
     }).catch(error => {
+        window.location.reload()
         console.error("Erro ao tentar registrar", error);
-        alert("Cadastro não efetuado! Tente novamente mais tarde");
+    }).finally(() => {
+        button.disabled = false;
+        button.textContent = 'Cadastrar'
     })
 })
 
