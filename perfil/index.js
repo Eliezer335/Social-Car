@@ -61,3 +61,33 @@ function adicionarImg(){
     })
 
 }
+
+
+function adicionarImgPerfil(){
+    const inputImg = document.querySelector('.inputImgPerfil');
+    const exibirImg = document.querySelector('.exibirImgPerfil');
+
+    inputImg.addEventListener('change', function(event) {
+        const inputTarget = event.target;
+        console.log(inputTarget.files);
+        const imagem = inputTarget.files[0];
+
+        console.log(imagem);
+
+        if(imagem){
+            const reader = new FileReader();
+
+            reader.addEventListener('load', function(event) {
+                const readerTarget = event.target;
+                exibirImg.innerHTML = ""
+                const img = document.createElement('imgPerfil');
+                img.src = readerTarget.result
+                img.classList.add('exibirImgPerfil');
+
+                exibirImg.appendChild(img)
+            })
+            reader.readAsDataURL(imagem)
+         }
+    })
+
+}
