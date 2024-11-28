@@ -37,10 +37,10 @@ function adicionarImg(){
 
     inputImg.addEventListener('change', function(event) {
         const inputTarget = event.target;
-        console.log(inputTarget.files);
+        // console.log(inputTarget.files);
         const imagem = inputTarget.files[0];
 
-        console.log(imagem);
+        // console.log(imagem);
 
         if(imagem){
             const reader = new FileReader();
@@ -55,9 +55,7 @@ function adicionarImg(){
                 exibirImg.appendChild(img)
             })
             reader.readAsDataURL(imagem)
-         }//else{
-        //     imagem.innerHTML = imagem
-        // }
+         }
     })
 
 }
@@ -65,29 +63,39 @@ function adicionarImg(){
 
 function adicionarImgPerfil(){
     const inputImg = document.querySelector('.inputImgPerfil');
-    const exibirImg = document.querySelector('.exibirImgPerfil');
+    const perfil = document.querySelector(".imgPerfil")
+    const credenciais = JSON.parse(localStorage.getItem("SocialCar"))
 
     inputImg.addEventListener('change', function(event) {
         const inputTarget = event.target;
-        console.log(inputTarget.files);
+        event.preventDefault()
         const imagem = inputTarget.files[0];
-
-        console.log(imagem);
+        
+        const ObjImg = {
+            file: imagem,
+            token: credenciais.token
+        }
 
         if(imagem){
             const reader = new FileReader();
-
             reader.addEventListener('load', function(event) {
                 const readerTarget = event.target;
-                exibirImg.innerHTML = ""
-                const img = document.createElement('imgPerfil');
-                img.src = readerTarget.result
-                img.classList.add('exibirImgPerfil');
-
-                exibirImg.appendChild(img)
+                perfil.style.backgroundImage = `url(${readerTarget.result})`
             })
             reader.readAsDataURL(imagem)
          }
+        const resposta = confirm("Você quer usar essa imagem de perfil?");
+        console.log(resposta);
+        if(resposta){
+             axios.post("https://socialcar-back.onrender.com/register/profile", ObjImg).then(result => {
+                localStorage.SocialCar = result.data
+                perfil.style.backgroundImage = `url(${result.data.url})`
+             }).catch(error => {
+                console.error(error)
+             })
+        }else{
+            return
+        }
     })
-
+    
 }
