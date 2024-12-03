@@ -10,7 +10,7 @@ function verificaLogin(){
 }
 verificaLogin();
 
-function abrirAba() {
+function abrirAbaPublicacao() {
     const aberturaPopUp = document.querySelector('.container_popup')
 
     const credenciais = localStorage.getItem("SocialCar")
@@ -22,11 +22,14 @@ function abrirAba() {
     }
 }
 
-function fecharAba() {
-    const aberturaPopUp = document.querySelector('.container_popup')
+function abrirAba(classe) {
+    const aberturaPopUp = document.querySelector(classe)
+    aberturaPopUp.style.display="block";
+}
+function fecharAba(classe) {
+    const aberturaPopUp = document.querySelector(classe)
     aberturaPopUp.style.display="none";
     
-
 }
 
 function adicionarImg(){
@@ -60,18 +63,43 @@ function adicionarImg(){
 
 }
 
+// function popUpBuleano(){
+//     let resposta = null;
+//     const ImgAceita = document.getElementById("btnTrue").addEventListener('onclick',() => {
+//         resposta = true
+//     })
+//     const ImgNegada = document.getElementById("btnFalse").addEventListener('onclick',() => {
+//         resposta = false
+//     })
+//     console.log(resposta)
+//     return resposta
+// }
+
 
 function adicionarImgPerfil(){
     const inputImg = document.querySelector('.inputImgPerfil');
     const perfil = document.querySelector(".imgPerfil")
     const credenciais = JSON.parse(localStorage.getItem("SocialCar"))
 
+    let resposta = null;
+    document.getElementById("btnTrue").addEventListener('onclick',() => {
+         resposta = true
+     })
+    document.getElementById("btnFalse").addEventListener('onclick',() => {
+         resposta = false
+     })
+
+     console.log(resposta)
+     
+    let ObjImg = null;
+    
+    
     inputImg.addEventListener('change', function(event) {
         const inputTarget = event.target;
         event.preventDefault()
         const imagem = inputTarget.files[0];
         
-        const ObjImg = {
+        ObjImg = {
             file: imagem,
             token: credenciais.token
         }
@@ -81,21 +109,23 @@ function adicionarImgPerfil(){
             reader.addEventListener('load', function(event) {
                 const readerTarget = event.target;
                 perfil.style.backgroundImage = `url(${readerTarget.result})`
+                setInterval(() => {
+                    abrirAba('.containerPopUp')
+                }, 5000);
             })
             reader.readAsDataURL(imagem)
          }
-        const resposta = confirm("Você quer usar essa imagem de perfil?");
-        console.log(resposta);
-        if(resposta){
-             axios.post("https://socialcar-back.onrender.com/register/profile", ObjImg).then(result => {
-                localStorage.SocialCar = result.data
-                perfil.style.backgroundImage = `url(${result.data.url})`
-             }).catch(error => {
-                console.error(error)
-             })
-        }else{
-            return
-        }
-    })
-    
+
+      }
+    )
+    if(resposta){
+        axios.post("https://socialcar-back.onrender.com/register/profile", ObjImg).then(result => {
+           localStorage.SocialCar = result.data
+           perfil.style.backgroundImage = `url(${result.data.url})`
+        }).catch(error => {
+           console.error(error)
+        })
+    }else{
+        return
+    }   
 }

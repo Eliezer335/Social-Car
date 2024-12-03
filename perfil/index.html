@@ -47,7 +47,13 @@
 
     </div>
     <main class="corpo">
-
+        <div class="containerPopUp" onclick="abrirAba('.containerPopUp')">
+            <div class="popUpPerfil">
+                <h2 class="h2PopUpPerfil">Você deseja usar essa imagem de perfil?</h2>
+                <button class="btnPopUpPerfil" id="btnTrue">Sim</button>
+                <button class="btnPopUpPerfil" id="btnFalse">Não</button>
+            </div>
+        </div>    
         <div class="perfil_container">
             <div class="caixaPerfil">
                 <div class="perfil">
@@ -57,13 +63,12 @@
                             <span class="exibirImgPerfil"></span>
                         </label>
                     </div>
-
                     <div class="nomePerfil">Eliezer Martinhago da silva</div>
                 </div>    
                 <p class="pPerfil">Compartilhe suas ideias!</p>
 
                 <div class="caixaBtnPerfil">
-                    <button onclick="abrirAba()" class="btnPublicar">Criar publicação</button>
+                    <button onclick="abrirAbaPublicacao()" class="btnPublicar">Criar publicação</button>
                 </div>
             </div>
         </div>

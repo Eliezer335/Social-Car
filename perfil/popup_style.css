@@ -103,3 +103,38 @@
 .inputImg{
     display: none;
 }
+
+/* PopUp IMG perfil */
+
+.containerPopUp{
+    display: flex;
+    text-align: center;
+    margin: 165px 0 0 380px;
+    position: absolute;
+    display: none;
+}
+
+.popUpPerfil{
+    width: 220px;
+    height: 50px;
+    background-color: white;
+    padding: 6px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    border: solid 1px black;
+    box-shadow: -7px 5px 5px black;
+}
+
+.h2PopUpPerfil{
+    font-size: 12px;
+}
+
+.btnPopUpPerfil{
+    width: 60px;
+    height: auto;
+    border: none;
+    border-radius: 3px;
+    background-color: #fe7673;
+    
+}
+
