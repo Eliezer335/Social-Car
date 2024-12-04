@@ -22,8 +22,8 @@ formulario.addEventListener('submit', (evento) => {
     }).catch(error => {
         button.disabled=true
         button.textContent="Carregando..."
-        window.location.reload()
         console.error("Erro ao tentar fazer login", error);
+        window.location.reload()
     })
     button.disabled=false
     button.textContent="Login"
