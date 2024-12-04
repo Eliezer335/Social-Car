@@ -25,8 +25,6 @@ function abrirAba() {
 function fecharAba() {
     const aberturaPopUp = document.querySelector('.container_popup')
     aberturaPopUp.style.display="none";
-    
-
 }
 
 function adicionarImg(){
