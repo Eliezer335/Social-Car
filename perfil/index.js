@@ -123,7 +123,7 @@ function adicionarImgPerfil() {
     });
 
     document.getElementById("btnFalse").addEventListener('click', (event) => {
-        perfil.style.backgroundImage = `url()`;  // Limpa a imagem
+        verificaPerfil();
         fecharAba(".containerPopUp");
         event.preventDefault();
     });
