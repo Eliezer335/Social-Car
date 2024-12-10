@@ -108,7 +108,7 @@ function adicionarImgPerfil() {
             'Authorization': `Bearer ${credenciais.token}`, // Envia o token para autenticação
         };
 
-        axios.put("http://localhost:5000/register/profile", formData, { headers })
+        axios.put("https://socialcar-back.onrender.com/register/profile", formData, { headers })
             .then(result => {
                 localStorage.SocialCar = JSON.stringify(result.data);
                 verificaPerfil();
