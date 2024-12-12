@@ -15,7 +15,6 @@ formulario.addEventListener('submit', (evento) => {
     button.textContent = "Carregando...";
 
     axios.post("https://socialcar-back.onrender.com/login", credenciais).then(response => {
-        console.log("resposta", response.data);
         const objetoString = JSON.stringify(response.data)
         localStorage.SocialCar = objetoString
         window.location.href = "../Feed/index.html#ancora"

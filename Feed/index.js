@@ -35,11 +35,8 @@ function adicionarImg(){
 
     inputImg.addEventListener('change', function(event) {
         const inputTarget = event.target;
-        console.log(inputTarget.files);
         const imagem = inputTarget.files[0];
-
-        console.log(imagem);
-
+        
         if(imagem){
             const reader = new FileReader();
 
