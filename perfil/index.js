@@ -109,10 +109,10 @@ function adicionarImgPerfil() {
 
         axios.put("https://socialcar-back.onrender.com/register/profile", formData, { headers })
             .then(result => {
-                localStorage.SocialCar = JSON.stringify(result.data);
+                localStorage.setItem("SocialCar", JSON.stringify(result.data));
             })
             .catch(error => {
-                verificaPerfil()
+                verificaPerfil(".imgPerfil")
                 console.error(error);
             });
 
