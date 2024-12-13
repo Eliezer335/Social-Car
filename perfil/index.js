@@ -134,8 +134,8 @@ function adicionarImgPerfil() {
     botaoNao.addEventListener('click', handleBotaoNao);
 };
 
-function verificaPerfil() {
-    const perfil = document.querySelector(".imgPerfil");
+function verificaPerfil(classe) {
+    const perfil = document.querySelector(classe);
     const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
     if (credenciais.profileLink) {
         perfil.style.backgroundImage = `url(${credenciais.profileLink})`
@@ -144,4 +144,4 @@ function verificaPerfil() {
     }
 };
 
-verificaPerfil();
+verificaPerfil(".imgPerfil");
