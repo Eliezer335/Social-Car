@@ -145,3 +145,5 @@ function verificaPerfil(classe) {
 };
 
 verificaPerfil(".imgPerfil");
+verificaPerfil(".imgUsuario")
+verificaPerfil(".perfil_usuario")
