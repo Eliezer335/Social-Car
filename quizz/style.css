@@ -99,3 +99,51 @@
     background-size: contain;
 }
 
+
+/* quizz perguntas */
+
+.corpoQuizz{
+    background-image: linear-gradient(white, rgb(10, 10, 10));
+    background-attachment: fixed;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+}
+
+.titulo_quizz{
+    margin: 20px;
+}
+
+.btn_criar_quizz{
+    display: flex;
+    justify-content: right;
+    margin-right: 80px;
+}
+.btn_quizz{
+    width: 120px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center; 
+    background-color: #fe7673;
+    margin-bottom: 20px;
+    align-items: center;
+    margin-right: 20px;
+
+}
+
+.caixa_de_perguntas{
+    width: 75%;
+    text-align: center;
+}
+
+.caixa_btn{
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    box-sizing: border-box;
+}
