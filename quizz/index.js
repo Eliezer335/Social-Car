@@ -1,8 +1,13 @@
 let primeiraOpicao = null;
+let segundaOpicao = null;
+let terceiraOpicao = null;
+let opcoesCorretas = null;
+let respostasDoQuizz = null;
+
 
 const objetoQuizz = {
     title: "Qual carro combina mais com você?",
-    firtQuestion: {
+    firstQuestion: {
         title: "Escolha uma marca de sua preferencia",
         options: {
             option1: "toyota",
@@ -38,90 +43,138 @@ const objetoQuizz = {
     }
 };
 
-// const pegarQuizz = () => {
-//     axios.get("https://socialcar-back.onrender.com/quizz").then((response) =>{
-//         console.log(response.data)
-//         quizzes = response.data
-
-//     }).catch((error) => {
-//         console.error()
-//         console.log("Erro ao acessar o quizz: ",error)
-//     })
-// }
-
 const exibirCaixasQuizz = ()=>{
     const caixas = document.querySelector(".caixas_quizz")
 
     axios.get("https://socialcar-back.onrender.com/quizz").then((response) =>{
-        console.log(response.data)
         const quizzes = response.data
 
         for(const quizz of quizzes){
-            console.log("for",quizz)
+            const id= quizz._id;
             caixas.innerHTML += `
-            <a class="quizz" onclick="exibeNatela(${JSON.stringify(quizz)})">
-                <div class="titulo_quizz">
-                    <h2 class="h2_titulo_quizz">${quizz.title}</h2>
-                </div>
-                <div class="imagem_quizz"></div>
-            </a>
-        `
+                <a class="quizz" onclick="exibeNatela('${id}')">
+                    <div class="titulo_quizz">
+                        <h2 class="h2_titulo_quizz">${quizz.title}</h2>
+                    </div>
+                    <div class="imagem_quizz"></div>
+                </a>
+            `
         }
     }).catch((error) => {
         console.error()
         console.log("Erro ao acessar o quizz: ",error)
     })
-
-    console.log("lista", quizzes)
-
-   
 }
 exibirCaixasQuizz();
 
-const exibeNatela = (meuquizz)=>{
+const exibeNatela = (id)=>{
     const corpo = document.querySelector(".corpoQuizz")
-    const quizz = JSON.parse(meuquizz)
-    console.log("Exibir na tela quizz", quizz)
+    console.log("id ",id)
     
-    corpo.innerHTML= `
-        <div class="caixa_de_perguntas">
-        <h2 class="titulo_quizz">${quizz.firtQuestion.title}</h2><br>
-        <h3 class="perguntas_quizz">Escolha uma marca de sua preferência!</h3>    
-        
-        <div class="caixa_btn" id="marca">
-            <button class="btn_quizz" id="marca1" onclick="escolhePrimeiraOpcao('opcao1')">Toyota</button>
-            <button class="btn_quizz" id="marca2" onclick="escolheMarca()">Mercedes</button>
-            <button class="btn_quizz" id="marca3" onclick="escolheMarca()">Nissan</button>
-        </div>
+    axios.get(`https://socialcar-back.onrender.com/quizz/${id}`).then((response) =>{
+        const quizz = response.data
+        opcoesCorretas = [quizz.rightOptions.firstQuestion, quizz.rightOptions.secondQuestion, quizz.rightOptions.thirdQuestion]
+        respostasDoQuizz = [quizz.answers.oneRight, quizz.answers.twoRight, quizz.answers.threeRight]
 
-        <h3 class="perguntas_quizz">Escolha uma categoria de sua preferência!</h3>
-        <div class="perguntas_quizz">
-            <div class="caixa_btn">
-                <button class="btn_quizz">Suv</button>
-                <button class="btn_quizz">Sedã</button>
-                <button class="btn_quizz">Pick-up</button>
+        corpo.innerHTML= `
+            <div class="caixa_de_perguntas">
+            <h2 class="titulo_quizz">${quizz.title}</h2><br>
+            <h3 class="perguntas_quizz">${quizz.firstQuestion.title}</h3>    
+            
+            <div class="caixa_btn" id="marca">
+                <button class="btn_quizz btn1" id="primeiroBotao1" onclick="escolhePrimeiraOpcao('option1', 'primeiroBotao1')">${quizz.firstQuestion.options.option1}</button>
+                <button class="btn_quizz btn1" id="primeiroBotao2" onclick="escolhePrimeiraOpcao('option2', 'primeiroBotao2')">${quizz.firstQuestion.options.option2}</button>
+                <button class="btn_quizz btn1" id="primeiroBotao3" onclick="escolhePrimeiraOpcao('option3', 'primeiroBotao3')">${quizz.firstQuestion.options.option3}</button>
+            </div>
+
+            <h3 class="perguntas_quizz">${quizz.secondQuestion.title}</h3>
+            <div class="perguntas_quizz">
+                <div class="caixa_btn">
+                    <button class="btn_quizz btn2"  id="segundoBotao1" onclick="escolheSegundaOpcao('option1', 'segundoBotao1')">${quizz.secondQuestion.options.option1}</button>
+                    <button class="btn_quizz btn2"  id="segundoBotao2" onclick="escolheSegundaOpcao('option2', 'segundoBotao2')">${quizz.secondQuestion.options.option2}</button>
+                    <button class="btn_quizz btn2"  id="segundoBotao3" onclick="escolheSegundaOpcao('option3', 'segundoBotao3')">${quizz.secondQuestion.options.option3}</button>
+                </div>
+            </div>
+
+            <h3 class="perguntas_quizz">${quizz.thirdQuestion.title}</h3>
+            <div class="perguntas_quizz">
+                <div class="caixa_btn">
+                    <button class="btn_quizz btn3" id="terceiroBotao1" onclick="escolheTerceiraOpcao('option1', 'terceiroBotao1')">${quizz.thirdQuestion.options.option1}</button>
+                    <button class="btn_quizz btn3" id="terceiroBotao2" onclick="escolheTerceiraOpcao('option2','terceiroBotao2')">${quizz.thirdQuestion.options.option2}</button>
+                    <button class="btn_quizz btn3" id="terceiroBotao3" onclick="escolheTerceiraOpcao('option3', 'terceiroBotao3')">${quizz.thirdQuestion.options.option3}</button>
+                </div>
             </div>
         </div>
-
-        <h3 class="perguntas_quizz">"Escolha a sua preferencia entre</h3>
-        <div class="perguntas_quizz">
-            <div class="caixa_btn">
-                <button class="btn_quizz">veloz</button>
-                <button class="btn_quizz">Confortavel</button>
-                <button class="btn_quizz">4x4</button>
-            </div>
+        <div class="btn_criar_quizz">
+            <button class="btn_quizz" onclick="darResposta()"><b>Responder</b></button>
         </div>
-    </div>
-    <div class="btn_criar_quizz">
-        <div class="btn_quizz"><b>Responder</b></div>
-    </div>
-    `
-    corpo.style.display = "block"
+        `
     
+    })   
+    corpo.style.display = "block" 
 }
 
 
-const escolhePrimeiraOpcao = (opicao)=>{
+const escolhePrimeiraOpcao = (opicao,idButton)=>{
+    const botao = document.getElementById(idButton)
+    const buttons = document.querySelectorAll(".btn1")
+
+    buttons.forEach((button) => {
+        button.classList.remove("check")
+    })
+    botao.classList.add("check")
+    console.log(botao)
+
     primeiraOpicao = opicao
+
 }
 
+const escolheSegundaOpcao = (opicao,idButton)=>{
+    const botao = document.getElementById(idButton)
+    const buttons = document.querySelectorAll(".btn2")
+
+    buttons.forEach((button) => {
+        button.classList.remove("check")
+    })
+    botao.classList.add("check")
+    console.log(botao)
+
+    segundaOpicao = opicao    
+}
+const escolheTerceiraOpcao = (opicao,idButton)=>{
+    const botao = document.getElementById(idButton)
+    const buttons = document.querySelectorAll(".btn3")
+
+    buttons.forEach((button) => {
+        button.classList.remove("check")
+    })
+    botao.classList.add("check")
+    console.log(botao)
+
+    segundaOpicao = opicao  
+}
+
+const darResposta = ()=>{
+    let contador = 0
+    if(primeiraOpicao && segundaOpicao && terceiraOpicao){
+        if(opcoesCorretas[0] === primeiraOpicao){
+            contador++
+        }
+        if(opcoesCorretas[1] === segundaOpicao){
+            contador++
+        }
+        if(opcoesCorretas[2] === terceiraOpicao){
+            contador++
+        }
+    }
+
+    if(contador === 0 || contador === 1 ){
+        alert(respostasDoQuizz[0])
+    }
+    if(contador === 2){
+        alert(respostasDoQuizz[1])
+    }
+    if(contador === 3){
+        alert(respostasDoQuizz[2])
+    }
+}
