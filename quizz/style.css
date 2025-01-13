@@ -129,11 +129,11 @@
     border-radius: 8px;
     display: flex;
     justify-content: center; 
-    background-color: #fe7673;
+    background-color: #0c0c0c;
     margin-bottom: 20px;
     align-items: center;
     margin-right: 20px;
-
+    color: white;
 }
 
 .caixa_de_perguntas{
@@ -146,4 +146,9 @@
     justify-content: center;
     padding: 15px;
     box-sizing: border-box;
+}
+
+.check{
+    background-color: #fe7673;
+    color:#0c0c0c;
 }
