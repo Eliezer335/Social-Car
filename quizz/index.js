@@ -48,18 +48,22 @@ const exibirCaixasQuizz = ()=>{
 
     axios.get("https://socialcar-back.onrender.com/quizz").then((response) =>{
         const quizzes = response.data
-
-        for(const quizz of quizzes){
-            const id= quizz._id;
-            caixas.innerHTML += `
-                <a class="quizz" onclick="exibeNatela('${id}')">
-                    <div class="titulo_quizz">
-                        <h2 class="h2_titulo_quizz">${quizz.title}</h2>
-                    </div>
-                    <div class="imagem_quizz"></div>
-                </a>
-            `
+        if(!quizzes){
+            caixas.innerHTML = `
+            <h2>Carregando Quizzes ...</h2>`
         }
+        else{
+            for(const quizz of quizzes){
+                const id= quizz._id;
+                caixas.innerHTML += `
+                    <a class="quizz" onclick="exibeNatela('${id}')">
+                        <div class="titulo_quizz">
+                            <h2 class="h2_titulo_quizz">${quizz.title}</h2>
+                        </div>
+                        <div class="imagem_quizz"></div>
+                    </a>
+                `
+        }}
     }).catch((error) => {
         console.error()
         console.log("Erro ao acessar o quizz: ",error)
@@ -73,10 +77,13 @@ const exibeNatela = (id)=>{
     
     axios.get(`https://socialcar-back.onrender.com/quizz/${id}`).then((response) =>{
         const quizz = response.data
+        console.log(quizz)
         opcoesCorretas = [quizz.rightOptions.firstQuestion, quizz.rightOptions.secondQuestion, quizz.rightOptions.thirdQuestion]
         respostasDoQuizz = [quizz.answers.oneRight, quizz.answers.twoRight, quizz.answers.threeRight]
 
         corpo.innerHTML= `
+            <div class="caixa_popUp"></div>
+
             <div class="caixa_de_perguntas">
             <h2 class="titulo_quizz">${quizz.title}</h2><br>
             <h3 class="perguntas_quizz">${quizz.firstQuestion.title}</h3>    
@@ -169,12 +176,56 @@ const darResposta = ()=>{
     }
 
     if(contador === 0 || contador === 1 ){
-        alert(respostasDoQuizz[0])
+        const popUp = document.querySelector(".caixa_popUp")
+
+        popUp.innerHTML = `
+            <div class="popUp">
+                <h1 class="h3_resposta">${respostasDoQuizz[0]}</h1>
+                <div class="botoes">
+                    <button class="botaopopUp" onclick="finalizarQuizz('reload')">Responder novamente</button>
+                    <button class="botaopopUp" onclick="finalizarQuizz('voltar')">Voltar para Quizzes</button>
+                </div>
+            </div>
+        `
+        popUp.style.display = "flex" 
     }
+    
     if(contador === 2){
-        alert(respostasDoQuizz[1])
+        const popUp = document.querySelector(".caixa_popUp")
+
+        popUp.innerHTML = `
+            <div class="popUp">
+                <h1 class="h3_resposta">${respostasDoQuizz[1]}</h1>
+                <div class="botoes">
+                    <button class="botaopopUp" onclick="finalizarQuizz('reload')">Responder novamente</button>
+                    <button class="botaopopUp" onclick="finalizarQuizz('voltar')">Voltar para Quizzes</button>
+                </div>
+            </div>
+        `
+        popUp.style.display = "flex" 
     }
     if(contador === 3){
-        alert(respostasDoQuizz[2])
+        const popUp = document.querySelector(".caixa_popUp")
+
+        popUp.innerHTML = `
+            <div class="popUp">
+                <h1 class="h3_resposta">${respostasDoQuizz[2]}</h1>
+                <div class="botoes">
+                    <button class="botaopopUp" onclick="finalizarQuizz('reload')">Responder novamente</button>
+                    <button class="botaopopUp" onclick="finalizarQuizz('voltar')">Voltar para Quizzes</button>
+                </div>
+            </div>
+        `
+        popUp.style.display = "flex" 
+    }
+}
+
+const finalizarQuizz=(resposta) =>{
+    if(resposta === 'reload'){
+        const popUp = document.querySelector(".caixa_popUp")
+        popUp.style.display = 'none'
+    }
+    else if(resposta === 'voltar'){
+        window.location.reload()
     }
 }
