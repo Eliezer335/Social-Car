@@ -152,3 +152,53 @@
     background-color: #fe7673;
     color:#0c0c0c;
 }
+
+/* popUp resposta */
+
+.caixa_popUp{
+    padding: 50px;
+    box-sizing: border-box;
+    background-color: #0c0c0c7a;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popUp{
+    width: 900px;
+    height: 250px;
+    background-color: white;
+    border-radius: 15px;
+    border: solid 2px black;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.h3_resposta{
+    background-color: white;
+}
+
+.botoes{
+    width: 500px;
+    height: 50px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.botaopopUp{
+    width: 200px;
+    height: 40px;
+    background-color: #fe7673;
+    padding: 10px;
+    font-weight: 700;
+    border-radius: 5px;
+}
