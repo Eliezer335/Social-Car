@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>SocialCar- Quizz</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -14,39 +15,19 @@
         </div>
         <div class="botoesCabecario">
             <a href="../Feed/index.html"> <h2 class="botoesHeader"><b>Feed</b></h2></a>
-            <a href="index.html"> <h2 class="botoesHeader">Perfil</h2></a>
+            <a href="../perfil/index.html"> <h2 class="botoesHeader">Perfil</h2></a>
             <a href="../quizz/index.html"> <h2 class="botoesHeader">Quizz</h2></a>
             <a href="../sobre/index.html"> <h2 class="botoesHeader">Sobre</h2></a>
         </div>
     </header>
     <main class="corpo">
-
+        
         <div class="btn_criar_quizz">
             <div class="btn_quizz"><b>Crie seu Quizz</b></div>
         </div>
-       <div class="caixas_quizz" >
-        <div class="quizz"> 
-            <div class="titulo_quizz">
-                <h2 class="h2_titulo_quizz">Qual marca de carro combina mais com Você!</h2>
-            </div>
-            <div class="imagem_quizz"></div>
-        </div>
-
-        <div class="quizz"> 
-            <div class="titulo_quizz">
-                <h2 class="h2_titulo_quizz">Qual marca de carro combina mais com Você!</h2>
-            </div>
-            <div class="imagem_quizz"></div>
-        </div>
-
-        <div class="quizz"> 
-            <div class="titulo_quizz">
-                <h2 class="h2_titulo_quizz">Qual marca de carro combina mais com Você!</h2>
-            </div>
-            <div class="imagem_quizz"></div>
-        </div>
-        
-       </div> <!-- caixas_quizz -->
+       <div class="caixas_quizz"></div>
     </main>
+    <div class="corpoQuizz"></div>
+    <script src="index.js"></script>
 </body>
 </html>
