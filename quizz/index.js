@@ -43,18 +43,17 @@ const objetoQuizz = {
     }
 };
 
-const exibirCaixasQuizz = () => {
-    const caixas = document.querySelector(".caixas_quizz")
+const exibirCaixasQuizz = async () => {
+    const caixas = document.querySelector(".caixas_quizz");
 
-    axios.get("https://socialcar-back.onrender.com/quizz").then((response) => {
-        const quizzes = [];
-        quizzes.push(...response.data);
+    try {
+        caixas.innerHTML = `<h2>Carregando Quizzes ...</h2>`
 
-        if (quizzes.length === 0 || !quizzes) {
-            caixas.innerHTML = `
-            <h2>Carregando Quizzes ...</h2>`
-        }
-        else {
+        const response = await axios.get("https://socialcar-back.onrender.com/quizz");
+        quizzes = response.data;
+
+        if (quizzes && quizzes.length > 0) {
+            caixas.innerHTML = ""
             for (const quizz of quizzes) {
                 const id = quizz._id;
                 caixas.innerHTML += `
@@ -67,10 +66,13 @@ const exibirCaixasQuizz = () => {
                 `
             }
         }
-    }).catch((error) => {
-        console.error()
-        console.log("Erro ao acessar o quizz: ", error)
-    })
+        else {
+            caixas.innerHTML = `<h2>Nenhum quizz encontrado.</h2>`;
+        }
+    } catch {
+        caixas.innerHTML = `<h2>Erro ao carregar quizzes. Tente novamente mais tarde.</h2>`;
+        console.error("Erro ao carregar quizzes:", error);
+    }
 }
 exibirCaixasQuizz();
 
@@ -162,7 +164,7 @@ const escolheTerceiraOpcao = (opicao, idButton) => {
 const darResposta = () => {
     let contador = 0;
     const popUp = document.querySelector(".caixa_popUp")
-    const respondeuTudo =  primeiraOpicao && segundaOpicao && terceiraOpicao
+    const respondeuTudo = primeiraOpicao && segundaOpicao && terceiraOpicao
 
     if (respondeuTudo) {
         if (opcoesCorretas[0] === primeiraOpicao) {
