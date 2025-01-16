@@ -43,18 +43,20 @@ const objetoQuizz = {
     }
 };
 
-const exibirCaixasQuizz = ()=>{
+const exibirCaixasQuizz = () => {
     const caixas = document.querySelector(".caixas_quizz")
 
-    axios.get("https://socialcar-back.onrender.com/quizz").then((response) =>{
-        const quizzes = response.data
-        if(!quizzes){
+    axios.get("https://socialcar-back.onrender.com/quizz").then((response) => {
+        const quizzes = [];
+        quizzes.push(...response.data);
+
+        if (quizzes.length === 0 || !quizzes) {
             caixas.innerHTML = `
             <h2>Carregando Quizzes ...</h2>`
         }
-        else{
-            for(const quizz of quizzes){
-                const id= quizz._id;
+        else {
+            for (const quizz of quizzes) {
+                const id = quizz._id;
                 caixas.innerHTML += `
                     <a class="quizz" onclick="exibeNatela('${id}')">
                         <div class="titulo_quizz">
@@ -63,25 +65,24 @@ const exibirCaixasQuizz = ()=>{
                         <div class="imagem_quizz"></div>
                     </a>
                 `
-        }}
+            }
+        }
     }).catch((error) => {
         console.error()
-        console.log("Erro ao acessar o quizz: ",error)
+        console.log("Erro ao acessar o quizz: ", error)
     })
 }
 exibirCaixasQuizz();
 
-const exibeNatela = (id)=>{
+const exibeNatela = (id) => {
     const corpo = document.querySelector(".corpoQuizz")
-    console.log("id ",id)
-    
-    axios.get(`https://socialcar-back.onrender.com/quizz/${id}`).then((response) =>{
+
+    axios.get(`https://socialcar-back.onrender.com/quizz/${id}`).then((response) => {
         const quizz = response.data
-        console.log(quizz)
         opcoesCorretas = [quizz.rightOptions.firstQuestion, quizz.rightOptions.secondQuestion, quizz.rightOptions.thirdQuestion]
         respostasDoQuizz = [quizz.answers.oneRight, quizz.answers.twoRight, quizz.answers.threeRight]
 
-        corpo.innerHTML= `
+        corpo.innerHTML = `
             <div class="caixa_popUp"></div>
 
             <div class="caixa_de_perguntas">
@@ -116,13 +117,13 @@ const exibeNatela = (id)=>{
             <button class="btn_quizz" onclick="darResposta()"><b>Responder</b></button>
         </div>
         `
-    
-    })   
-    corpo.style.display = "block" 
+
+    })
+    corpo.style.display = "block"
 }
 
 
-const escolhePrimeiraOpcao = (opicao,idButton)=>{
+const escolhePrimeiraOpcao = (opicao, idButton) => {
     const botao = document.getElementById(idButton)
     const buttons = document.querySelectorAll(".btn1")
 
@@ -130,13 +131,12 @@ const escolhePrimeiraOpcao = (opicao,idButton)=>{
         button.classList.remove("check")
     })
     botao.classList.add("check")
-    console.log(botao)
 
     primeiraOpicao = opicao
 
 }
 
-const escolheSegundaOpcao = (opicao,idButton)=>{
+const escolheSegundaOpcao = (opicao, idButton) => {
     const botao = document.getElementById(idButton)
     const buttons = document.querySelectorAll(".btn2")
 
@@ -144,11 +144,10 @@ const escolheSegundaOpcao = (opicao,idButton)=>{
         button.classList.remove("check")
     })
     botao.classList.add("check")
-    console.log(botao)
 
-    segundaOpicao = opicao    
+    segundaOpicao = opicao
 }
-const escolheTerceiraOpcao = (opicao,idButton)=>{
+const escolheTerceiraOpcao = (opicao, idButton) => {
     const botao = document.getElementById(idButton)
     const buttons = document.querySelectorAll(".btn3")
 
@@ -156,76 +155,84 @@ const escolheTerceiraOpcao = (opicao,idButton)=>{
         button.classList.remove("check")
     })
     botao.classList.add("check")
-    console.log(botao)
 
-    segundaOpicao = opicao  
+    terceiraOpicao = opicao
 }
 
-const darResposta = ()=>{
-    let contador = 0
-    if(primeiraOpicao && segundaOpicao && terceiraOpicao){
-        if(opcoesCorretas[0] === primeiraOpicao){
+const darResposta = () => {
+    let contador = 0;
+    const popUp = document.querySelector(".caixa_popUp")
+    const respondeuTudo =  primeiraOpicao && segundaOpicao && terceiraOpicao
+
+    if (respondeuTudo) {
+        if (opcoesCorretas[0] === primeiraOpicao) {
             contador++
         }
-        if(opcoesCorretas[1] === segundaOpicao){
+        if (opcoesCorretas[1] === segundaOpicao) {
             contador++
         }
-        if(opcoesCorretas[2] === terceiraOpicao){
+        if (opcoesCorretas[2] === terceiraOpicao) {
             contador++
         }
+    } else {
+        popUp.innerHTML = `
+        <div class="popUp">
+            <h2>Você precisa escolher as 3 opções</h2>
+            <div class="botoes">
+                <button class="botaopopUp" onclick="finalizarQuizz('reload')">Continuar quizz</button>
+            </div>
+        </div>
+         `
+        popUp.style.display = "flex"
+
     }
 
-    if(contador === 0 || contador === 1 ){
-        const popUp = document.querySelector(".caixa_popUp")
-
+    if ((contador === 0 || contador === 1) && respondeuTudo) {
         popUp.innerHTML = `
             <div class="popUp">
-                <h1 class="h3_resposta">${respostasDoQuizz[0]}</h1>
+                <h1 class="h3_resposta">${respostasDoQuizz[0]}, acertou ${contador} questões.</h1>
                 <div class="botoes">
                     <button class="botaopopUp" onclick="finalizarQuizz('reload')">Responder novamente</button>
                     <button class="botaopopUp" onclick="finalizarQuizz('voltar')">Voltar para Quizzes</button>
                 </div>
             </div>
         `
-        popUp.style.display = "flex" 
+        popUp.style.display = "flex"
     }
-    
-    if(contador === 2){
-        const popUp = document.querySelector(".caixa_popUp")
 
+    if (contador === 2) {
         popUp.innerHTML = `
             <div class="popUp">
-                <h1 class="h3_resposta">${respostasDoQuizz[1]}</h1>
+                <h1 class="h3_resposta">${respostasDoQuizz[1]}, acertou ${contador} questões.</h1>
                 <div class="botoes">
                     <button class="botaopopUp" onclick="finalizarQuizz('reload')">Responder novamente</button>
                     <button class="botaopopUp" onclick="finalizarQuizz('voltar')">Voltar para Quizzes</button>
                 </div>
             </div>
         `
-        popUp.style.display = "flex" 
+        popUp.style.display = "flex"
     }
-    if(contador === 3){
-        const popUp = document.querySelector(".caixa_popUp")
 
+    if (contador === 3) {
         popUp.innerHTML = `
             <div class="popUp">
-                <h1 class="h3_resposta">${respostasDoQuizz[2]}</h1>
+                <h1 class="h3_resposta">${respostasDoQuizz[2]}, acertou ${contador} questões.</h1>
                 <div class="botoes">
                     <button class="botaopopUp" onclick="finalizarQuizz('reload')">Responder novamente</button>
                     <button class="botaopopUp" onclick="finalizarQuizz('voltar')">Voltar para Quizzes</button>
                 </div>
             </div>
         `
-        popUp.style.display = "flex" 
+        popUp.style.display = "flex"
     }
 }
 
-const finalizarQuizz=(resposta) =>{
-    if(resposta === 'reload'){
+const finalizarQuizz = (resposta) => {
+    if (resposta === 'reload') {
         const popUp = document.querySelector(".caixa_popUp")
         popUp.style.display = 'none'
     }
-    else if(resposta === 'voltar'){
+    else if (resposta === 'voltar') {
         window.location.reload()
     }
 }

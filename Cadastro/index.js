@@ -17,7 +17,6 @@ formulario.addEventListener('submit', (evento) => {
     button.textContent = "Carregando...";
 
     axios.post("https://socialcar-back.onrender.com/register", credenciais).then(response => {
-        console.log("resposta",response.data);
         window.location.href = "../login/index.html#ancora"
     }).catch(error => {
         window.location.reload()

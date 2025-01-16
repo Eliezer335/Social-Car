@@ -25,8 +25,6 @@ function abrirAba() {
 function fecharAba() {
     const aberturaPopUp = document.querySelector('.container_popup')
     aberturaPopUp.style.display="none";
-    
-
 }
 
 function adicionarImg(){
@@ -37,11 +35,8 @@ function adicionarImg(){
 
     inputImg.addEventListener('change', function(event) {
         const inputTarget = event.target;
-        console.log(inputTarget.files);
         const imagem = inputTarget.files[0];
-
-        console.log(imagem);
-
+        
         if(imagem){
             const reader = new FileReader();
 
@@ -61,3 +56,17 @@ function adicionarImg(){
     })
 
 }
+
+function verificaPerfil(classe) {
+    const perfil = document.querySelector(classe);
+    const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
+    if (credenciais.profileLink) {
+        perfil.style.backgroundImage = `url(${credenciais.profileLink})`
+    } else {
+        perfil.style.backgroundImage = `url()`
+    }
+};
+
+verificaPerfil(".imgUsuario");
+verificaPerfil(".imgPerfil");
+verificaPerfil(".perfil_usuario");

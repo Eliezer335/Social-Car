@@ -50,20 +50,23 @@ body{
 .corpo{
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    /* justify-content: space-between; */
     padding: 20px;
     box-sizing: border-box;
 } 
 .perfil_container{
-    width: 25%;
+    display: flex;
+    justify-content: center;
     height: auto;
 }
 .caixaPerfil{
-    width: 300px;
+    width: 600px;
     background-color: black;
     border-radius: 5px;
     padding: 25px;
     box-sizing: border-box;
+    margin: 20px;
 }
 .perfil{
     display: flex;
@@ -73,18 +76,45 @@ body{
 }
 
 .imgPerfil{
-    width: 40px;
-    height: 40px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    background-image: url();
+    /* background-image: url(imagem1.png); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     border: solid 0.5px white;
     background-color: rgb(184, 184, 184);
 }
+
+.imgPerfilBtn{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: solid 0.5px white;
+    background-color: rgb(184, 184, 184);
+}
+.icone{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: rgb(0, 0, 0);
+}
+
+input[type="file"]{
+    display: none;
+} 
+.exibirImgPerfil{
+    width: 50px;
+    height: 50px;
+    background-color: #fe7673;
+}
+
 .nomePerfil{
     margin: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 21px;
 }
 
 .pPerfil{
@@ -99,29 +129,14 @@ body{
     box-sizing: border-box;
 }
 .btnPublicar{
-    width: 200px;
+    width: 600px;
     height: 50px;
     background-color: #fe7673;
     border-radius: 10px;
     border: none;
 }
 
-.caixaQuizz{
-    text-align: center;
-    padding: 20px;
-    box-sizing: border-box;
-}
-.h3Quizz{
-    color: white;
-}
-
-.quizzSalvos{
-    color: white;
-    padding: 15px;
-}
-
 .publicacoes{
-    width: 75%;
     display: flex; 
     justify-content: center;
     align-items: center; 
@@ -149,7 +164,7 @@ body{
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-image: url();
+    background-image: url(imagem1.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
