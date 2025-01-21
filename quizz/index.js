@@ -52,7 +52,7 @@ const exibirCaixasQuizz = async () => {
         const response = await axios.get("https://socialcar-back.onrender.com/quizz");
         quizzes = response.data;
 
-        if (quizzes && quizzes.length > 0) {
+        if (quizzes || quizzes.length > 0) {
             caixas.innerHTML = ""
             for (const quizz of quizzes) {
                 const id = quizz._id;
