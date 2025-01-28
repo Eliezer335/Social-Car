@@ -120,6 +120,8 @@ const exibeNatela = (id) => {
         </div>
         `
 
+    }).catch((error)=>{
+        console.error("Algo deu errado ao tentar mostrar o quizz", error)
     })
     corpo.style.display = "block"
 }
