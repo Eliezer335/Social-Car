@@ -240,3 +240,96 @@ const finalizarQuizz = (resposta) => {
         window.location.reload()
     }
 }
+
+const exibeCriacaoQuizz = () => {
+    const corpo = document.querySelector(".corpoCriacaoQuizz")
+
+        corpo.innerHTML = `
+                <h2 class="title">Crie seu Quizz!</h2>
+                    <input class="opcioes" type="text" id="quizTitle" placeholder="Título do Quizz"><br>
+                <h3>Primeira Pergunta</h3>
+                    <input class="opcioes" type="text" id="firstQuestionTitle" placeholder="Título da Primeira Pergunta"><br>
+                    <input class="opcioes" type="text" id="firstOption1" placeholder="Opção 1"><br>
+                    <input class="opcioes" type="text" id="firstOption2" placeholder="Opção 2"><br>
+                    <input class="opcioes" type="text" id="firstOption3" placeholder="Opção 3"><br>
+                <h3>Segunda Pergunta</h3>
+                    <input class="opcioes" type="text" id="secondQuestionTitle" placeholder="Título da Segunda Pergunta"><br>
+                    <input class="opcioes" type="text" id="secondOption1" placeholder="Opção 1"><br>
+                    <input class="opcioes" type="text" id="secondOption2" placeholder="Opção 2"><br>
+                    <input class="opcioes" type="text" id="secondOption3" placeholder="Opção 3"><br>
+                <h3>Terceira Pergunta</h3>
+                <input class="opcioes" type="text" id="thirdQuestionTitle" placeholder="Título da Terceira Pergunta"><br>
+                <input class="opcioes" type="text" id="thirdOption1" placeholder="Opção 1"><br>
+                <input class="opcioes" type="text" id="thirdOption2" placeholder="Opção 2"><br>
+                <input class="opcioes" type="text" id="thirdOption3" placeholder="Opção 3"><br>
+                <h3>Respostas Corretas</h3>
+                <input class="opcioes" type="text" id="rightAnswer1" placeholder="Resposta Correta 1 (option1, option2, option3)"><br>
+                <input class="opcioes" type="text" id="rightAnswer2" placeholder="Resposta Correta 2 (option1, option2, option3)"><br>
+                <input class="opcioes" type="text" id="rightAnswer3" placeholder="Resposta Correta 3 (option1, option2, option3)"><br>
+                <h3>Mensagens de Resposta</h3>
+                <input class="opcioes" type="text" id="answerOneRight" placeholder="Mensagem para 1 resposta certa"><br>
+                <input class="opcioes" type="text" id="answerTwoRight" placeholder="Mensagem para 2 respostas certas"><br>
+                <input class="opcioes" type="text" id="answerThreeRight" placeholder="Mensagem para 3 respostas certas"><br>
+                <button class="btn_quizz_criacao" id="generateQuizBtn">Criar Quizz</button>  
+    `; 
+
+    corpo.style.display = "flex"
+    
+
+    const generateQuizBtn = document.getElementById("generateQuizBtn");
+    
+        generateQuizBtn.addEventListener("click", function () {
+            const objetoQuizz = {
+                title: document.getElementById("quizTitle").value,
+                firstQuestion: {
+                    title: document.getElementById("firstQuestionTitle").value,
+                    options: {
+                        option1: document.getElementById("firstOption1").value,
+                        option2: document.getElementById("firstOption2").value,
+                        option3: document.getElementById("firstOption3").value
+                    }
+                },
+                secondQuestion: {
+                    title: document.getElementById("secondQuestionTitle").value,
+                    options: {
+                        option1: document.getElementById("secondOption1").value,
+                        option2: document.getElementById("secondOption2").value,
+                        option3: document.getElementById("secondOption3").value
+                    }
+                },
+                thirdQuestion: {
+                    title: document.getElementById("thirdQuestionTitle").value,
+                    options: {
+                        option1: document.getElementById("thirdOption1").value,
+                        option2: document.getElementById("thirdOption2").value,
+                        option3: document.getElementById("thirdOption3").value
+                    }
+                },
+                rightOptions: {
+                    firstQuestion: document.getElementById("rightAnswer1").value,
+                    secondQuestion: document.getElementById("rightAnswer2").value,
+                    thirdQuestion: document.getElementById("rightAnswer3").value
+                },
+                answers: {
+                    oneRight: document.getElementById("answerOneRight").value,
+                    twoRight: document.getElementById("answerTwoRight").value,
+                    threeRight: document.getElementById("answerThreeRight").value
+                }
+            };
+    
+            console.log(objetoQuizz);
+
+            const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
+            const headers = {
+                'Authorization': `Bearer ${credenciais.token}`,
+            };
+
+            axios.post(`https://socialcar-back.onrender.com/quizz`, objetoQuizz, {headers}).then((response) => {
+                console.log("API ", response.data)
+                window.location.reload()
+            }).catch((error) => {
+                console.error("Erro ao enviar para API" , error)
+            }) 
+        });
+   
+}

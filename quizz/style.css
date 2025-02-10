@@ -202,3 +202,41 @@
     font-weight: 700;
     border-radius: 5px;
 }
+
+/* criacao quizz */
+
+.corpoCriacaoQuizz{
+    background-image: linear-gradient(white, rgb(10, 10, 10));
+    background-attachment: fixed;
+    height: auto;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;    
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.opcioes{
+    width: 400px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.btn_quizz_criacao{
+    width: 120px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center; 
+    background-color: #fe7673;
+    margin-bottom: 20px;
+    align-items: center;
+    margin-right: 20px;
+    color: rgb(0, 0, 0);
+}
