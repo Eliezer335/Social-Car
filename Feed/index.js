@@ -1,3 +1,5 @@
+let imagemParaenviar= null;
+
 function verificaLogin(){
     const credenciais = localStorage.getItem("SocialCar")
     const perfil = document.querySelector(".perfil")
@@ -27,35 +29,31 @@ function fecharAba() {
     aberturaPopUp.style.display="none";
 }
 
-function adicionarImg(){
+function adicionarImg() {
     const inputImg = document.querySelector('.inputImg');
     const exibirImg = document.querySelector('.exibirImg');
-    const imagemTxt = 'Escolha uma imagem'
-    exibirImg.innerHTML = imagemTxt
-
-    inputImg.addEventListener('change', function(event) {
-        const inputTarget = event.target;
-        const imagem = inputTarget.files[0];
-        
-        if(imagem){
-            const reader = new FileReader();
-
-            reader.addEventListener('load', function(event) {
-                const readerTarget = event.target;
-                exibirImg.innerHTML = ""
-                const img = document.createElement('img');
-                img.src = readerTarget.result
-                img.classList.add('exibirImg');
-
-                exibirImg.appendChild(img)
-            })
-            reader.readAsDataURL(imagem)
-         }//else{
-        //     imagem.innerHTML = imagem
-        // }
-    })
-
-}
+    const imagemTxt = 'Escolha uma imagem';
+    exibirImg.textContent = imagemTxt;
+  
+    inputImg.addEventListener('change', function (event) {
+      const imagem = event.target.files[0];  
+      imagemParaenviar = imagem
+  
+      if (imagem) {
+        const reader = new FileReader();
+  
+        reader.addEventListener('load', function (event) {
+          exibirImg.style.backgroundImage = `url(${event.target.result})`;
+          exibirImg.style.backgroundSize = 'cover';
+          exibirImg.style.backgroundPosition = 'center';
+          exibirImg.textContent = ""; // Remove o texto padrão ao carregar a imagem
+        });
+  
+        reader.readAsDataURL(imagem);
+      }
+    });
+  }
+  
 
 function verificaPerfil(classe) {
     const perfil = document.querySelector(classe);
