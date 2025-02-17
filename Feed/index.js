@@ -65,6 +65,20 @@ function verificaPerfil(classe) {
     }
 };
 
+const enviarPublicacao = async () =>{
+    const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
+    const headers = {
+        'Authorization': `Bearer ${credenciais.token}`,
+    };
+
+    try{
+        const response = await axios.post(`https://socialcar-back.onrender.com/post`,imagemParaenviar,headers)
+        console.log(response.data)
+    }catch(error){
+        console.error("Erro ao enviar publicação",error)
+    }
+}
+
 verificaPerfil(".imgUsuario");
 verificaPerfil(".imgPerfil");
 verificaPerfil(".perfil_usuario");
