@@ -31,8 +31,8 @@ function fecharAba() {
 
 function adicionarImg() {
     const inputImg = document.querySelector('.inputImg');
-    const exibirImg = document.querySelector('.exibirImg');
-    const imagemTxt = 'Escolha uma imagem';
+    let exibirImg = document.querySelector('.exibirImg');
+    const imagemTxt = 'Escolha uma imagem de 16x9';
     exibirImg.textContent = imagemTxt;
   
     inputImg.addEventListener('change', function (event) {
@@ -52,7 +52,8 @@ function adicionarImg() {
         reader.readAsDataURL(imagem);
       }
     });
-  }
+    
+}
   
 
 function verificaPerfil(classe) {
@@ -77,6 +78,7 @@ const enviarPublicacao = async () =>{
     }catch(error){
         console.error("Erro ao enviar publicação",error)
     }
+
 }
 
 verificaPerfil(".imgUsuario");
