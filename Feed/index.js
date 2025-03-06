@@ -54,26 +54,36 @@ function adicionarImg() {
     });
     
 }
-  
 
 function verificaPerfil(classe) {
     const perfil = document.querySelector(classe);
     const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
     if (credenciais.profileLink) {
-        perfil.style.backgroundImage = `url(${credenciais.profileLink})`
+        perfil.style.backgroundImage = `url('${credenciais.profileLink}')`
     } else {
         perfil.style.backgroundImage = `url()`
     }
 };
 
+function pegarTexto(){
+    const txtArea = document.querySelector('.txtArea')
+        return txtArea.value
+}
+
 const enviarPublicacao = async () =>{
     const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
+    const txtArea = document.querySelector('.txtArea')
+    const caption = txtArea.value
+    const formData = new FormData()
+    formData.append("caption",caption)
+    formData.append("file",imagemParaenviar)
+
     const headers = {
         'Authorization': `Bearer ${credenciais.token}`,
     };
 
     try{
-        const response = await axios.post(`https://socialcar-back.onrender.com/post`,imagemParaenviar,headers)
+        const response = await axios.post(`https://socialcar-back.onrender.com/post`,formData,{ headers })
         console.log(response.data)
     }catch(error){
         console.error("Erro ao enviar publicação",error)
@@ -84,3 +94,4 @@ const enviarPublicacao = async () =>{
 verificaPerfil(".imgUsuario");
 verificaPerfil(".imgPerfil");
 verificaPerfil(".perfil_usuario");
+pegarTexto()

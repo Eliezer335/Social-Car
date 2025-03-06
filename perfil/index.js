@@ -138,7 +138,7 @@ function verificaPerfil(classe) {
     const perfil = document.querySelector(classe);
     const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
     if (credenciais.profileLink) {
-        perfil.style.backgroundImage = `url(${credenciais.profileLink})`
+        perfil.style.backgroundImage = `url('${credenciais.profileLink}')`
     } else {
         perfil.style.backgroundImage = `url()`
     }
