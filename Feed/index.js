@@ -71,6 +71,7 @@ function pegarTexto(){
 }
 
 const enviarPublicacao = async () =>{
+    const botaoEnviar = document.querySelector(".botaoEnviar")
     const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
     const txtArea = document.querySelector('.txtArea')
     const caption = txtArea.value
@@ -83,10 +84,14 @@ const enviarPublicacao = async () =>{
     };
 
     try{
+        botaoEnviar.textContent= "Enviando..."
         const response = await axios.post(`https://socialcar-back.onrender.com/post`,formData,{ headers })
         console.log(response.data)
     }catch(error){
+        botaoEnviar.textContent= "Enviar"
         console.error("Erro ao enviar publicação",error)
+    }finally{
+        location.reload()
     }
 
 }
