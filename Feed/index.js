@@ -1,3 +1,5 @@
+let imagemParaenviar= null;
+
 function verificaLogin(){
     const credenciais = localStorage.getItem("SocialCar")
     const perfil = document.querySelector(".perfil")
@@ -27,46 +29,74 @@ function fecharAba() {
     aberturaPopUp.style.display="none";
 }
 
-function adicionarImg(){
+function adicionarImg() {
     const inputImg = document.querySelector('.inputImg');
-    const exibirImg = document.querySelector('.exibirImg');
-    const imagemTxt = 'Escolha uma imagem'
-    exibirImg.innerHTML = imagemTxt
-
-    inputImg.addEventListener('change', function(event) {
-        const inputTarget = event.target;
-        const imagem = inputTarget.files[0];
-        
-        if(imagem){
-            const reader = new FileReader();
-
-            reader.addEventListener('load', function(event) {
-                const readerTarget = event.target;
-                exibirImg.innerHTML = ""
-                const img = document.createElement('img');
-                img.src = readerTarget.result
-                img.classList.add('exibirImg');
-
-                exibirImg.appendChild(img)
-            })
-            reader.readAsDataURL(imagem)
-         }//else{
-        //     imagem.innerHTML = imagem
-        // }
-    })
-
+    let exibirImg = document.querySelector('.exibirImg');
+    const imagemTxt = 'Escolha uma imagem de 16x9';
+    exibirImg.textContent = imagemTxt;
+  
+    inputImg.addEventListener('change', function (event) {
+      const imagem = event.target.files[0];  
+      imagemParaenviar = imagem
+  
+      if (imagem) {
+        const reader = new FileReader();
+  
+        reader.addEventListener('load', function (event) {
+          exibirImg.style.backgroundImage = `url(${event.target.result})`;
+          exibirImg.style.backgroundSize = 'cover';
+          exibirImg.style.backgroundPosition = 'center';
+          exibirImg.textContent = ""; // Remove o texto padrão ao carregar a imagem
+        });
+  
+        reader.readAsDataURL(imagem);
+      }
+    });
+    
 }
 
 function verificaPerfil(classe) {
     const perfil = document.querySelector(classe);
     const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
     if (credenciais.profileLink) {
-        perfil.style.backgroundImage = `url(${credenciais.profileLink})`
+        perfil.style.backgroundImage = `url('${credenciais.profileLink}')`
     } else {
         perfil.style.backgroundImage = `url()`
     }
 };
 
+function pegarTexto(){
+    const txtArea = document.querySelector('.txtArea')
+        return txtArea.value
+}
+
+const enviarPublicacao = async () =>{
+    const botaoEnviar = document.querySelector(".botaoEnviar")
+    const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
+    const txtArea = document.querySelector('.txtArea')
+    const caption = txtArea.value
+    const formData = new FormData()
+    formData.append("caption",caption)
+    formData.append("file",imagemParaenviar)
+
+    const headers = {
+        'Authorization': `Bearer ${credenciais.token}`,
+    };
+
+    try{
+        botaoEnviar.textContent= "Enviando..."
+        const response = await axios.post(`https://socialcar-back.onrender.com/post`,formData,{ headers })
+        console.log(response.data)
+    }catch(error){
+        botaoEnviar.textContent= "Enviar"
+        console.error("Erro ao enviar publicação",error)
+    }finally{
+        location.reload()
+    }
+
+}
+
 verificaPerfil(".imgUsuario");
 verificaPerfil(".imgPerfil");
 verificaPerfil(".perfil_usuario");
+pegarTexto()

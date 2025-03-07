@@ -5,43 +5,43 @@ let opcoesCorretas = null;
 let respostasDoQuizz = null;
 
 
-const objetoQuizz = {
-    title: "Qual carro combina mais com você?",
-    firstQuestion: {
-        title: "Escolha uma marca de sua preferencia",
-        options: {
-            option1: "toyota",
-            option2: "mercedes",
-            option3: "nissan"
-        }
-    },
-    secondQuestion: {
-        title: "Escolha uma categoria de sua preferência!",
-        options: {
-            option1: "suv",
-            option2: "sedã",
-            option3: "pick-up"
-        }
-    },
-    thirdQuestion: {
-        title: "Escolha a sua preferencia entre",
-        options: {
-            option1: "veloz",
-            option2: "confortavel",
-            option3: "4x4"
-        }
-    },
-    rightOptions: {
-        firstQuestion: "option1",
-        secondQuestion: "option3",
-        thirdQuestion: "option2"
-    },
-    answers: {
-        oneRight: "Você é péssimo",
-        twoRight: "Você sabe mais ou menos",
-        threeRight: "Você é um especialista"
-    }
-};
+// const objetoQuizz = {
+//     title: "Qual carro combina mais com você?",
+//     firstQuestion: {
+//         title: "Escolha uma marca de sua preferencia",
+//         options: {
+//             option1: "toyota",
+//             option2: "mercedes",
+//             option3: "nissan"
+//         }
+//     },
+//     secondQuestion: {
+//         title: "Escolha uma categoria de sua preferência!",
+//         options: {
+//             option1: "suv",
+//             option2: "sedã",
+//             option3: "pick-up"
+//         }
+//     },
+//     thirdQuestion: {
+//         title: "Escolha a sua preferencia entre",
+//         options: {
+//             option1: "veloz",
+//             option2: "confortavel",
+//             option3: "4x4"
+//         }
+//     },
+//     rightOptions: {
+//         firstQuestion: "option1",
+//         secondQuestion: "option3",
+//         thirdQuestion: "option2"
+//     },
+//     answers: {
+//         oneRight: "Você é péssimo",
+//         twoRight: "Você sabe mais ou menos",
+//         threeRight: "Você é um especialista"
+//     }
+// };
 
 const exibirCaixasQuizz = async () => {
     const caixas = document.querySelector(".caixas_quizz");
@@ -76,10 +76,12 @@ const exibirCaixasQuizz = async () => {
 }
 exibirCaixasQuizz();
 
-const exibeNatela = (id) => {
+const exibeNatela = async(id) => {
     const corpo = document.querySelector(".corpoQuizz")
 
-    axios.get(`https://socialcar-back.onrender.com/quizz/${id}`).then((response) => {
+    try{
+        const response = await axios.get(`https://socialcar-back.onrender.com/quizz/${id}`)
+
         const quizz = response.data
         opcoesCorretas = [quizz.rightOptions.firstQuestion, quizz.rightOptions.secondQuestion, quizz.rightOptions.thirdQuestion]
         respostasDoQuizz = [quizz.answers.oneRight, quizz.answers.twoRight, quizz.answers.threeRight]
@@ -120,9 +122,9 @@ const exibeNatela = (id) => {
         </div>
         `
 
-    }).catch((error)=>{
+    }catch(error) {
         console.error("Algo deu errado ao tentar mostrar o quizz", error)
-    })
+    }
     corpo.style.display = "block"
 }
 
@@ -278,7 +280,7 @@ const exibeCriacaoQuizz = () => {
 
     const generateQuizBtn = document.getElementById("generateQuizBtn");
     
-        generateQuizBtn.addEventListener("click", function () {
+        generateQuizBtn.addEventListener("click", async function () {
             const objetoQuizz = {
                 title: document.getElementById("quizTitle").value,
                 firstQuestion: {
@@ -316,20 +318,19 @@ const exibeCriacaoQuizz = () => {
                     threeRight: document.getElementById("answerThreeRight").value
                 }
             };
-    
-            console.log(objetoQuizz);
 
             const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
             const headers = {
                 'Authorization': `Bearer ${credenciais.token}`,
             };
 
-            axios.post(`https://socialcar-back.onrender.com/quizz`, objetoQuizz, {headers}).then((response) => {
-                console.log("API ", response.data)
+            try{
+                const response = await axios.post(`https://socialcar-back.onrender.com/quizz`, objetoQuizz, {headers})
                 window.location.reload()
-            }).catch((error) => {
+
+            }catch(error){
                 console.error("Erro ao enviar para API" , error)
-            }) 
+            }
         });
    
 }
