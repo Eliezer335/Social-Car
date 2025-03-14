@@ -135,7 +135,7 @@ const exibirPublicacoes = async () => {
 }
 exibirPublicacoes();
 
-// verificaPerfil(".imgUsuario");
-// verificaPerfil(".imgPerfil");
+verificaPerfil(".imgUsuario");
+verificaPerfil(".imgPerfil");
 verificaPerfil(".perfil_usuario");
 pegarTexto()
