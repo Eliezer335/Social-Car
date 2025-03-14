@@ -74,6 +74,11 @@
     border: 2px dashed rgb(168, 168, 168);
     cursor: pointer;
 }
+.exibirImg{
+    color:  rgb(168, 168, 168);
+    width: 100%;
+    height: 100%;
+}
 
 .exibirImg{
     color:  rgb(168, 168, 168);
