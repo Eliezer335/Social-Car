@@ -1,3 +1,5 @@
+let imagemParaenviar= null;
+
 function verificaLogin() {
     const credenciais = localStorage.getItem("SocialCar")
     const perfil = document.querySelector(".perfil")
@@ -35,12 +37,13 @@ function fecharAba(classe) {
 function adicionarImg() {
     const inputImg = document.querySelector('.inputImg');
     const exibirImg = document.querySelector('.exibirImg');
-    const imagemTxt = 'Escolha uma imagem'
+    const imagemTxt = 'Escolha uma imagem de 16x9'
     exibirImg.innerHTML = imagemTxt
 
     inputImg.addEventListener('change', function (event) {
         const inputTarget = event.target;
         const imagem = inputTarget.files[0];
+        imagemParaenviar = imagem
         if (imagem) {
             const reader = new FileReader();
 
@@ -139,13 +142,82 @@ function verificaPerfil(classe) {
     const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
     const nomePerfil = document.querySelector(".nomePerfil")
     nomePerfil.textContent = credenciais.name
-    console.log("ola",credenciais)
     if (credenciais.profileLink) {
         perfil.style.backgroundImage = `url('${credenciais.profileLink}')`
     } else {
         perfil.style.backgroundImage = `url()`
     }
 };
+
+const enviarPublicacao = async () =>{
+    const botaoEnviar = document.querySelector(".botaoEnviar")
+    const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
+    const txtArea = document.querySelector('.txtArea')
+    const caption = txtArea.value
+    const formData = new FormData()
+    formData.append("caption",caption)
+    formData.append("file",imagemParaenviar)
+
+    const headers = {
+        'Authorization': `Bearer ${credenciais.token}`,
+    };
+
+    try{
+        botaoEnviar.textContent= "Enviando..."
+        const response = await axios.post(`https://socialcar-back.onrender.com/post`,formData,{ headers })
+        console.log(response.data)
+    }catch(error){
+        botaoEnviar.textContent= "Enviar"
+        console.error("Erro ao enviar publicação",error)
+    }finally{
+        location.reload()
+    }
+
+}
+
+const exibirPublicacoes = async () => {
+    const publicacoes = document.querySelector(".publicacoes");
+    const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
+
+    const headers = {
+        'Authorization': `Bearer ${credenciais.token}`,
+    };
+
+    try {
+        publicacoes.innerHTML = `<h2>Carregando Publicacoes ...</h2>`
+
+        const response = await axios.get("https://socialcar-back.onrender.com/post/user",{headers});
+        const posts = response.data;
+        console.log("publicacoes", posts)
+
+        if (posts || posts.length > 0) {
+            publicacoes.innerHTML = ``
+            for (const publicacao of posts) {
+                publicacoes.innerHTML += `
+                    <div class="publicacao">
+                        <div class="containerUsuario">
+                        <div class="imgUsuario"></div>
+                        <div class="nomeUsuario">Nome ..</div>
+                        </div>
+                        <div class="legendaPublicacao">${publicacao.caption}</div>
+                        <img class="imgPublicacao" src="${publicacao.photo}"></img>
+                    </div>
+                `
+            }
+        }
+        else {
+            caixas.innerHTML = `<h2>Nenhum post encontrado.</h2>`;
+        }
+    } catch {
+        publicacoes.innerHTML = `<h2>Erro ao carregar publicacoes. Tente novamente mais tarde.</h2>`;
+        console.error("Erro ao carregar publicacoes:", error);
+    }finally{
+        if(posts.length === 0){
+            publicacoes.innerHTML = `<h2>Não a Publicacoes ...</h2>`
+        }
+    }
+}
+exibirPublicacoes();
 
 verificaPerfil(".imgPerfil");
 verificaPerfil(".imgUsuario")

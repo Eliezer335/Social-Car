@@ -96,6 +96,45 @@ const enviarPublicacao = async () =>{
 
 }
 
+const exibirPublicacoes = async () => {
+    const publicacoes = document.querySelector(".publicacoes");
+
+    try {
+        publicacoes.innerHTML = `<h2>Carregando Publicacoes ...</h2>`
+
+        const response = await axios.get("https://socialcar-back.onrender.com/post");
+        const posts = response.data;
+        console.log("publicacoes", posts)
+
+        if (posts || posts.length > 0) {
+            publicacoes.innerHTML = ``
+            for (const publicacao of posts) {
+                publicacoes.innerHTML += `
+                    <div class="publicacao">
+                        <div class="containerUsuario">
+                        <div class="imgUsuario"></div>
+                        <div class="nomeUsuario">Nome ..</div>
+                        </div>
+                        <div class="legendaPublicacao">${publicacao.caption}</div>
+                        <img class="imgPublicacao" src="${publicacao.photo}"></img>
+                    </div>
+                `
+            }
+        }
+        else {
+            caixas.innerHTML = `<h2>Nenhum post encontrado.</h2>`;
+        }
+    } catch {
+        publicacoes.innerHTML = `<h2>Erro ao carregar publicacoes. Tente novamente mais tarde.</h2>`;
+        console.error("Erro ao carregar publicacoes:", error);
+    }finally{
+        if(posts.length === 0){
+            publicacoes.innerHTML = `<h2>Não a Publicacoes ...</h2>`
+        }
+    }
+}
+exibirPublicacoes();
+
 verificaPerfil(".imgUsuario");
 verificaPerfil(".imgPerfil");
 verificaPerfil(".perfil_usuario");
