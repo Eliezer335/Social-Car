@@ -217,8 +217,13 @@ const exibirPublicacoes = async () => {
         }
     }
 }
-exibirPublicacoes();
 
+function encerrarSessao(){
+    localStorage.removeItem("SocialCar");
+    window.location.href="../login/index.html";
+}
+
+exibirPublicacoes();
 verificaPerfil(".imgPerfil");
 verificaPerfil(".imgUsuario")
 verificaPerfil(".perfil_usuario")
