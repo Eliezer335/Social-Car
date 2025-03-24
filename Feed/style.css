@@ -46,6 +46,7 @@ body{
 .botoesHeader{
     display: flex;
     padding-left: 80px;
+    cursor: pointer;
     
 }
 .corpo{
