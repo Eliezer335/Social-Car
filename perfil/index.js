@@ -178,6 +178,8 @@ const enviarPublicacao = async () =>{
 const exibirPublicacoes = async () => {
     const publicacoes = document.querySelector(".publicacoes");
     const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
+    const nomePerfil = document.querySelector(".nomeUsuario")
+    nomePerfil.textContent = credenciais.name;
 
     const headers = {
         'Authorization': `Bearer ${credenciais.token}`,
@@ -188,16 +190,16 @@ const exibirPublicacoes = async () => {
 
         const response = await axios.get("https://socialcar-back.onrender.com/post/user",{headers});
         const posts = response.data;
-        console.log("publicacoes", posts)
 
         if (posts || posts.length > 0) {
             publicacoes.innerHTML = ``
             for (const publicacao of posts) {
+                console.log("publicacoes", publicacao)
                 publicacoes.innerHTML += `
                     <div class="publicacao">
                         <div class="containerUsuario">
-                        <div class="imgUsuario"></div>
-                        <div class="nomeUsuario">Nome ..</div>
+                            <div class="imgUsuario" src="${publicacao.photo}"></div>
+                            <div class="nomeUsuario">${publicacao.name}</div>
                         </div>
                         <div class="legendaPublicacao">${publicacao.caption}</div>
                         <img class="imgPublicacao" src="${publicacao.photo}"></img>
