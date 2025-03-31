@@ -1,4 +1,4 @@
-let imagemParaenviar= null;
+let imagemParaenviar = null;
 
 function verificaLogin() {
     const credenciais = localStorage.getItem("SocialCar")
@@ -31,7 +31,6 @@ function abrirAba(classe) {
 function fecharAba(classe) {
     const aberturaPopUp = document.querySelector(classe)
     aberturaPopUp.style.display = "none";
-
 }
 
 function adicionarImg() {
@@ -63,6 +62,7 @@ function adicionarImg() {
 };
 
 function adicionarImgPerfil() {
+    const textoDoPopUp = document.querySelector(".textoDoPopUpPerfil");
     const inputImg = document.querySelector('.inputImgPerfil');
     const perfil = document.querySelector(".imgPerfil");
     const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
@@ -110,30 +110,35 @@ function adicionarImgPerfil() {
             'Authorization': `Bearer ${credenciais.token}`,
         };
 
+        textoDoPopUp.textContent = "Carregando..."
         axios.put("https://socialcar-back.onrender.com/register/profile", formData, { headers })
             .then(result => {
                 localStorage.setItem("SocialCar", JSON.stringify(result.data));
+                verificaPerfil(".imgPerfil")
             })
             .catch(error => {
-                verificaPerfil(".imgPerfil")
+                textoDoPopUp.textContent = "Erro ao carregar imagem!"
+                verificaPerfil(".imgPerfil");
                 console.error(error);
-            });
+            }).finally(() => {
+                fecharAba(".containerPopUp");
+            })
 
-        fecharAba(".containerPopUp");
+
         botaoSim.removeEventListener('click', handleBotaoSim);
     };
 
     const handleBotaoNao = (event) => {
         event.preventDefault();
-        verificaPerfil();
+        verificaPerfil(".imgPerfil");
         fecharAba(".containerPopUp");
         botaoNao.removeEventListener('click', handleBotaoNao);
     };
 
     inputImg.addEventListener('change', handleMudaImagemDePerfil);
-    
+
     botaoSim.addEventListener('click', handleBotaoSim);
-    
+
     botaoNao.addEventListener('click', handleBotaoNao);
 };
 
@@ -149,27 +154,26 @@ function verificaPerfil(classe) {
     }
 };
 
-const enviarPublicacao = async () =>{
+const enviarPublicacao = async () => {
     const botaoEnviar = document.querySelector(".botaoEnviar")
     const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
     const txtArea = document.querySelector('.txtArea')
     const caption = txtArea.value
     const formData = new FormData()
-    formData.append("caption",caption)
-    formData.append("file",imagemParaenviar)
+    formData.append("caption", caption)
+    formData.append("file", imagemParaenviar)
 
     const headers = {
         'Authorization': `Bearer ${credenciais.token}`,
     };
 
-    try{
-        botaoEnviar.textContent= "Enviando..."
-        const response = await axios.post(`https://socialcar-back.onrender.com/post`,formData,{ headers })
-        console.log(response.data)
-    }catch(error){
-        botaoEnviar.textContent= "Enviar"
-        console.error("Erro ao enviar publicação",error)
-    }finally{
+    try {
+        botaoEnviar.textContent = "Enviando..."
+        const response = await axios.post(`https://socialcar-back.onrender.com/post`, formData, { headers })
+    } catch (error) {
+        botaoEnviar.textContent = "Enviar"
+        console.error("Erro ao enviar publicação", error)
+    } finally {
         location.reload()
     }
 
@@ -188,13 +192,12 @@ const exibirPublicacoes = async () => {
     try {
         publicacoes.innerHTML = `<h2>Carregando Publicacoes ...</h2>`
 
-        const response = await axios.get("https://socialcar-back.onrender.com/post/user",{headers});
+        const response = await axios.get("https://socialcar-back.onrender.com/post/user", { headers });
         const posts = response.data;
 
         if (posts || posts.length > 0) {
             publicacoes.innerHTML = ``
             for (const publicacao of posts) {
-                console.log("publicacoes", publicacao)
                 publicacoes.innerHTML += `
                     <div class="publicacao">
                         <div class="containerUsuario">
@@ -213,16 +216,16 @@ const exibirPublicacoes = async () => {
     } catch {
         publicacoes.innerHTML = `<h2>Erro ao carregar publicacoes. Tente novamente mais tarde.</h2>`;
         console.error("Erro ao carregar publicacoes:", error);
-    }finally{
-        if(posts.length === 0){
+    } finally {
+        if (posts.length === 0) {
             publicacoes.innerHTML = `<h2>Não a Publicacoes ...</h2>`
         }
     }
 }
 
-function encerrarSessao(){
+function encerrarSessao() {
     localStorage.removeItem("SocialCar");
-    window.location.href="../login/index.html";
+    window.location.href = "../login/index.html";
 }
 
 exibirPublicacoes();
