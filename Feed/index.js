@@ -104,7 +104,6 @@ const exibirPublicacoes = async () => {
 
         const response = await axios.get("https://socialcar-back.onrender.com/post");
         const posts = response.data;
-        console.log("publicacoes", posts)
 
         if (posts.length > 0) {
             publicacoes.innerHTML = ``
@@ -112,8 +111,8 @@ const exibirPublicacoes = async () => {
                 publicacoes.innerHTML += `
                     <div class="publicacao">
                         <div class="containerUsuario">
-                        <div class="imgUsuario"></div>
-                        <div class="nomeUsuario">Nome ..</div>
+                        <img class="imgUsuario" src="${publicacao.profileUrl}"/>
+                        <div class="nomeUsuario">${publicacao.name}</div>
                         </div>
                         <div class="legendaPublicacao">${publicacao.caption}</div>
                         <img class="imgPublicacao" src="${publicacao.photo}"></img>
@@ -135,6 +134,18 @@ function encerrarSessao() {
     window.location.href = "../login/index.html";
 }
 
+function perfil(nome,img){
+    const nomeperfil = document.querySelector(nome)
+    const imageperfil = document.querySelector(img)
+    const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
+
+    nomeperfil.textContent = credenciais.name
+    imageperfil.style.backgroundImage = `url('${credenciais.profileLink}')`
+}
+
+
+perfil(".nomePerfil",".imgPerfil")
+perfil(".nome_usuario",".perfil_usuario")
 exibirPublicacoes();
 verificaPerfil(".imgUsuario");
 verificaPerfil(".imgPerfil");
