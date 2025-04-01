@@ -195,15 +195,22 @@ const exibirPublicacoes = async () => {
         const response = await axios.get("https://socialcar-back.onrender.com/post/user", { headers });
         const posts = response.data;
 
-        if (posts || posts.length > 0) {
+        if (posts.length > 0) {
             publicacoes.innerHTML = ``
             for (const publicacao of posts) {
                 publicacoes.innerHTML += `
                     <div class="publicacao">
                         <div class="containerUsuario">
                             <div class="imgUsuario" src="${publicacao.photo}"></div>
-                            <div class="nomeUsuario">${publicacao.name}</div>
+                            <div class="nomeUsuario">${publicacao.name}</div>  
                         </div>
+                        <div class="delete_publi">
+                                <div class="img_delete"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome 
+                                Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 
+                                2025 Fonticons, Inc.--><path fill="#ffffff" d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 
+                                32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 
+                                467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></div>
+                        </div>  
                         <div class="legendaPublicacao">${publicacao.caption}</div>
                         <img class="imgPublicacao" src="${publicacao.photo}"></img>
                     </div>
@@ -211,16 +218,13 @@ const exibirPublicacoes = async () => {
             }
         }
         else {
-            caixas.innerHTML = `<h2>Nenhum post encontrado.</h2>`;
+            publicacoes.innerHTML = `<h2>Nenhum post encontrado.</h2>`;
         }
+        
     } catch {
         publicacoes.innerHTML = `<h2>Erro ao carregar publicacoes. Tente novamente mais tarde.</h2>`;
         console.error("Erro ao carregar publicacoes:", error);
-    } finally {
-        if (posts.length === 0) {
-            publicacoes.innerHTML = `<h2>Não a Publicacoes ...</h2>`
-        }
-    }
+    } 
 }
 
 function encerrarSessao() {
@@ -228,6 +232,17 @@ function encerrarSessao() {
     window.location.href = "../login/index.html";
 }
 
+function perfil(nome,img){
+    const nomeperfil = document.querySelector(nome)
+    const imageperfil = document.querySelector(img)
+    const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
+
+    nomeperfil.textContent = credenciais.name
+    imageperfil.style.backgroundImage = `url('${credenciais.profileLink}')`
+}
+
+
+perfil(".nome_usuario",".perfil_usuario")
 exibirPublicacoes();
 verificaPerfil(".imgPerfil");
 verificaPerfil(".imgUsuario")
