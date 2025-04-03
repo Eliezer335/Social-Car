@@ -143,8 +143,6 @@ function encerrarSessao(event) {
     btnNao.addEventListener("click", function () {
         popup.style.display="none" 
     });
-        
-    
 }
 
 function perfil(nome,img){

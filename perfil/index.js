@@ -144,6 +144,7 @@ function adicionarImgPerfil() {
 
 function verificaPerfil(classe) {
     const perfil = document.querySelector(classe);
+    console.log(classe, perfil)
     const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
     const nomePerfil = document.querySelector(".nomePerfil")
     nomePerfil.textContent = credenciais.name
@@ -198,21 +199,24 @@ const exibirPublicacoes = async () => {
         if (posts.length > 0) {
             publicacoes.innerHTML = ``
             for (const publicacao of posts) {
+                console.log(publicacao)
                 publicacoes.innerHTML += `
                     <div class="publicacao">
                         <div class="containerUsuario">
-                            <div class="imgUsuario" src="${publicacao.photo}"></div>
+                            <img class="imgUsuario" src="${publicacao.profileUrl}" />
                             <div class="nomeUsuario">${publicacao.name}</div>  
                         </div>
                         <div class="delete_publi">
-                                <buttun class="img_delete" onclick="deletarPublicacao(${publicacao._id})"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome 
+                            <buttun class="img_delete" onclick="deletarPublicacao('${publicacao._id}')">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome 
                                 Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 
                                 2025 Fonticons, Inc.--><path fill="#ffffff" d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 
                                 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 
-                                467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></button>
+                                467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                            </button>
                         </div>  
                         <div class="legendaPublicacao">${publicacao.caption}</div>
-                        <img class="imgPublicacao" src="${publicacao.photo}"></img>
+                        <img class="imgPublicacao" src="${publicacao.photo}" />
                     </div>
                 `
             }
@@ -220,18 +224,18 @@ const exibirPublicacoes = async () => {
         else {
             publicacoes.innerHTML = `<h2>Nenhum post encontrado.</h2>`;
         }
-        
+
     } catch {
         publicacoes.innerHTML = `<h2>Erro ao carregar publicacoes. Tente novamente mais tarde.</h2>`;
         console.error("Erro ao carregar publicacoes:", error);
-    } 
+    }
 }
 
 function encerrarSessao(event) {
     const popup = document.querySelector(".containerPopUpSair")
     const btnSim = document.getElementById('btnSimSair')
     const btnNao = document.getElementById('btnNaoSair')
-    popup.style.display="block"
+    popup.style.display = "block"
 
     btnSim.addEventListener("click", function () {
         localStorage.removeItem("SocialCar");
@@ -239,13 +243,13 @@ function encerrarSessao(event) {
     });
 
     btnNao.addEventListener("click", function () {
-        popup.style.display="none" 
+        popup.style.display = "none"
     });
-        
-    
+
+
 }
 
-function perfil(nome,img){
+function perfil(nome, img) {
     const nomeperfil = document.querySelector(nome)
     const imageperfil = document.querySelector(img)
     const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
@@ -263,20 +267,17 @@ const deletarPublicacao = async (id) => {
     };
 
     try {
-        const response = await axios.delete(`https://socialcar-back.onrender.com/post/${_id}`, { headers })
-        console.log("Respose Delete",response)
-
+        await axios.delete(`https://socialcar-back.onrender.com/post/${id}`, { headers })
     } catch (error) {
         console.error("Erro ao deletar a publicação", error)
     } finally {
-        // location.reload()
+        window.location.reload();
     }
 
 }
 
 
-perfil(".nome_usuario",".perfil_usuario")
+perfil(".nome_usuario", ".perfil_usuario")
 exibirPublicacoes();
 verificaPerfil(".imgPerfil");
-verificaPerfil(".imgUsuario")
 verificaPerfil(".perfil_usuario")
