@@ -205,11 +205,11 @@ const exibirPublicacoes = async () => {
                             <div class="nomeUsuario">${publicacao.name}</div>  
                         </div>
                         <div class="delete_publi">
-                                <div class="img_delete"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome 
+                                <buttun class="img_delete" onclick="deletarPublicacao(${publicacao._id})"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome 
                                 Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 
                                 2025 Fonticons, Inc.--><path fill="#ffffff" d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 
                                 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 
-                                467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></div>
+                                467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></button>
                         </div>  
                         <div class="legendaPublicacao">${publicacao.caption}</div>
                         <img class="imgPublicacao" src="${publicacao.photo}"></img>
@@ -227,9 +227,22 @@ const exibirPublicacoes = async () => {
     } 
 }
 
-function encerrarSessao() {
-    localStorage.removeItem("SocialCar");
-    window.location.href = "../login/index.html";
+function encerrarSessao(event) {
+    const popup = document.querySelector(".containerPopUpSair")
+    const btnSim = document.getElementById('btnSimSair')
+    const btnNao = document.getElementById('btnNaoSair')
+    popup.style.display="block"
+
+    btnSim.addEventListener("click", function () {
+        localStorage.removeItem("SocialCar");
+        window.location.href = "../login/index.html";
+    });
+
+    btnNao.addEventListener("click", function () {
+        popup.style.display="none" 
+    });
+        
+    
 }
 
 function perfil(nome,img){
@@ -239,6 +252,26 @@ function perfil(nome,img){
 
     nomeperfil.textContent = credenciais.name
     imageperfil.style.backgroundImage = `url('${credenciais.profileLink}')`
+}
+
+const deletarPublicacao = async (id) => {
+    alert("Certeza que vai apagar essa publicacao")
+    const credenciais = JSON.parse(localStorage.getItem("SocialCar"));
+
+    const headers = {
+        'Authorization': `Bearer ${credenciais.token}`,
+    };
+
+    try {
+        const response = await axios.delete(`https://socialcar-back.onrender.com/post/${_id}`, { headers })
+        console.log("Respose Delete",response)
+
+    } catch (error) {
+        console.error("Erro ao deletar a publicação", error)
+    } finally {
+        // location.reload()
+    }
+
 }
 
 
