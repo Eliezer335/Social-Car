@@ -6,6 +6,7 @@
     <title>Feed | SocialCar</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="popup_style.css">
+    <link rel="stylesheet" href="popup_sair.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
@@ -19,7 +20,16 @@
             <a href="../perfil/index.html"> <h2 class="botoesHeader">Perfil</h2></a>
             <a href="../quizz/index.html"> <h2 class="botoesHeader">Quizz</h2></a>
             <a href="../sobre/index.html"> <h2 class="botoesHeader">Sobre</h2></a>
-            <div onclick="encerrarSessao()"> <h2 class="botoesHeader">Sair</h2></div>
+            <div>
+                <h2 class="botoesHeader" onclick="abrirAbaSair('.containerPopUpSair')">Sair</h2>
+                    <div class="containerPopUpSair">
+                        <div class="popUpPerfil">
+                            <h2 class="h2PopUpPerfil">Você deseja encerrar a sessão?</h2>
+                            <button class="btnPopUpPerfil" id="btnSimSair" onclick="encerrarSessao()">Sim</button>
+                            <button class="btnPopUpPerfil" id="btnNaoSair" onclick="encerrarSessao()">Não</button>
+                        </div>
+                    </div>
+            </div>
         </div>
     </header>
     <div class="container_popup" onclick="fecharAba()">
