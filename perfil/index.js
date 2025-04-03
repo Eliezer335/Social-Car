@@ -225,7 +225,7 @@ const exibirPublicacoes = async () => {
             publicacoes.innerHTML = `<h2>Nenhum post encontrado.</h2>`;
         }
 
-    } catch {
+    } catch (error) {
         publicacoes.innerHTML = `<h2>Erro ao carregar publicacoes. Tente novamente mais tarde.</h2>`;
         console.error("Erro ao carregar publicacoes:", error);
     }
