@@ -115,6 +115,7 @@ function adicionarImgPerfil() {
             .then(result => {
                 localStorage.setItem("SocialCar", JSON.stringify(result.data));
                 verificaPerfil(".imgPerfil")
+                exibirPublicacoes();
             })
             .catch(error => {
                 textoDoPopUp.textContent = "Erro ao carregar imagem!"
@@ -122,6 +123,7 @@ function adicionarImgPerfil() {
                 console.error(error);
             }).finally(() => {
                 fecharAba(".containerPopUp");
+                textoDoPopUp.textContent = ""
             })
 
 
@@ -170,12 +172,12 @@ const enviarPublicacao = async () => {
 
     try {
         botaoEnviar.textContent = "Enviando..."
-        const response = await axios.post(`https://socialcar-back.onrender.com/post`, formData, { headers })
+        await axios.post(`https://socialcar-back.onrender.com/post`, formData, { headers })
     } catch (error) {
         botaoEnviar.textContent = "Enviar"
         console.error("Erro ao enviar publicação", error)
     } finally {
-        location.reload()
+        window.location.reload()
     }
 
 }
