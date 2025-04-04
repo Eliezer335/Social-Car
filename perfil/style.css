@@ -45,7 +45,7 @@ body{
 .botoesHeader{
     display: flex;
     padding-left: 80px;
-    
+    cursor: pointer;
 }
 .corpo{
     width: 100%;
@@ -80,7 +80,6 @@ body{
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    /* background-image: url(imagem1.png); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -159,13 +158,14 @@ input[type="file"]{
     align-items: center;
     padding: 15px;
     box-sizing: border-box;
+    position: absolute;
 }
 
 .imgUsuario{
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-image: url(imagem1.png);
+    background-image: url();
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -176,17 +176,33 @@ input[type="file"]{
     margin-left: 10px;
 }
 
+.delete_publi{
+    display: flex;
+    justify-content: right;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+.img_delete{
+    position: relative;
+    top: 0px;
+    right: 0px;
+    width: 10px;
+    height: 5px;
+
+}
+
 .legendaPublicacao{
     color: white;
-    padding-top: 15px;
+    padding-top: 60px;
     text-align: center;
 }
 
 .imgPublicacao{
     width: 600px;
     height: 400px;
-    margin-top: 10px;
-    background-image: url(fusca.png);
+    margin-top: 20px;
+    background-image: url();
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;

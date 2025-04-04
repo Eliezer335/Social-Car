@@ -1,5 +1,5 @@
 const formulario = document.querySelector(".formulario");
-formulario.addEventListener('submit', (evento) => {
+formulario.addEventListener('submit',async (evento) => {
     evento.preventDefault();
     const button = document.querySelector(".button");
 
@@ -16,14 +16,16 @@ formulario.addEventListener('submit', (evento) => {
     button.disabled = true;
     button.textContent = "Carregando...";
 
-    axios.post("https://socialcar-back.onrender.com/register", credenciais).then(response => {
-        window.location.href = "../login/index.html#ancora"
-    }).catch(error => {
-        window.location.reload()
-        console.error("Erro ao tentar registrar", error);
-    }).finally(() => {
+    try{
+        const response = await axios.post("https://socialcar-back.onrender.com/register", credenciais)
+        const objetoString = JSON.stringify(response.data)        
+        localStorage.SocialCar = objetoString
+        window.location.href = "../login/index.html#ancora"    
+    } catch{
+        console.error("Erro ao tentar fazer login", error);
+    } finally{
         button.disabled = false;
-        button.textContent = 'Cadastrar'
-    })
+        button.textContent = 'login'
+    }
 })
 
