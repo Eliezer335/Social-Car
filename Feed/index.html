@@ -17,11 +17,12 @@
         </div>
         <div class="botoesCabecario">
             <a href="../Feed/index.html"> <h2 class="botoesHeader"><b>Feed</b></h2></a>
-            <a href="../perfil/index.html"> <h2 class="botoesHeader">Perfil</h2></a>
+            <a href="../perfil/index.html"> <h2 class="botoesHeader" id="btnPerfil">Perfil</h2></a>
             <a href="../quizz/index.html"> <h2 class="botoesHeader">Quizz</h2></a>
             <a href="../sobre/index.html"> <h2 class="botoesHeader">Sobre</h2></a>
+            <a href="../login/index.html"> <h2 class="botoesHeader" id="login">Login</h2></a>
             <div>
-                <h2 class="botoesHeader" onclick="abrirAbaSair('.containerPopUpSair')">Sair</h2>
+                <h2 class="botoesHeader" id="btnSair" onclick="abrirAbaSair('.containerPopUpSair')">Sair</h2>
                     <div class="containerPopUpSair">
                         <div class="popUpPerfil">
                             <h2 class="h2PopUpPerfil">Você deseja encerrar a sessão?</h2>
@@ -40,7 +41,7 @@
                     <div class="perfil_usuario"></div>
                     <h3 class="nome_usuario"></h3>
                 </div>
-                <textarea class="txtArea" name="textBox" id="textBox" ></textarea>
+                <textarea class="txtArea" name="textBox" id="textBox" placeholder="Legenda da sua Publicação!"></textarea>
                 <div class="caixaBtn">
                     <div class="caixaBtnImg">
                         <label class="labelBtnImg" onclick="adicionarImg()">
@@ -61,14 +62,7 @@
 
 
         <div class="publicacoes">
-            <div class="publicacao">
-                <div class="containerUsuario">
-                    <div class="imgUsuario"></div>
-                    <div class="nomeUsuario"></div>
-                </div>
-                <div class="legendaPublicacao"></div>
-                <div class="imgPublicacao"></div>
-            </div>
+            
 
         </div>
         <div class="perfil_container">
