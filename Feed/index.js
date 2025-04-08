@@ -4,10 +4,16 @@ function verificaLogin() {
     const credenciais = localStorage.getItem("SocialCar")
     const perfil = document.querySelector(".perfil")
     const caixaQuizz = document.querySelector(".caixaQuizz")
+    const btnSair = document.getElementById("btnSair")
+    const btnPerfil = document.getElementById("btnPerfil")
+    const btnLogin = document.getElementById("login")
 
     if (!credenciais) {
         perfil.style.display = "none";
         caixaQuizz.style.display = "none";
+        btnSair.style.display = "none"
+        btnPerfil.style.display = "none"
+        btnLogin.style.display = "block"
     }
 }
 verificaLogin();
@@ -159,10 +165,9 @@ function abrirAbaSair(classe) {
     aberturaPopUp.style.display = "block";
 }
 
-
+exibirPublicacoes();
 perfil(".nomePerfil",".imgPerfil")
 perfil(".nome_usuario",".perfil_usuario")
-exibirPublicacoes();
 verificaPerfil(".imgUsuario");
 verificaPerfil(".imgPerfil");
 verificaPerfil(".perfil_usuario");

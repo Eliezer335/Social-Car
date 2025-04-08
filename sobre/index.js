@@ -20,3 +20,17 @@ function encerrarSessao(event) {
         
     
 }
+
+function verificaLogin() {
+    const credenciais = localStorage.getItem("SocialCar")
+    const btnSair = document.getElementById("btnSair")
+    const btnPerfil = document.getElementById("btnPerfil")
+    const btnLogin = document.getElementById("login")
+
+    if (!credenciais) {
+        btnSair.style.display = "none"
+        btnPerfil.style.display = "none"
+        btnLogin.style.display = "block"
+    }
+}
+verificaLogin();
