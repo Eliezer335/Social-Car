@@ -203,6 +203,10 @@
     border-radius: 5px;
 }
 
+#login {
+    display: none;
+}
+
 /* criacao quizz */
 
 .corpoCriacaoQuizz{
